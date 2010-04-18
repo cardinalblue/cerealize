@@ -1,5 +1,6 @@
 = cerealize todo list
 
+* extract options, instead of hardcoded into method closure (block)
 * extract base64 decorator, then we can use pure marshal
 * datamapper support
 * json support
