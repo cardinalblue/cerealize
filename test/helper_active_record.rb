@@ -24,7 +24,7 @@ class Cat < ActiveRecord::Base
   include Cerealize
   cerealize :name, String, :encoding => :yaml
   cerealize :tail, Array,  :encoding => :marshal, :force_encoding => true
-  cerealize :food, Hash,   :encoding => :marshal
+  cerealize :food, Hash,   :encoding => :marshal, :force_encoding => false
 end
 
 ActiveRecord::Base.connection.create_table :cats, :force => true do |t|
