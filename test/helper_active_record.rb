@@ -30,4 +30,5 @@ end
 ActiveRecord::Base.connection.create_table :cats, :force => true do |t|
   t.text :name
   t.text :tail
+  t.text :food
 end
