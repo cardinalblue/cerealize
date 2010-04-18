@@ -158,5 +158,85 @@ class AllCodecTest < Test::Unit::TestCase
 
       assert_equal [ :pounds, :francs ], Boat.find_by_name('bounty').captain[:pocket]
     end
+
+
+    define_method "test_#{encoding}_class_checking" do
+      set_encoding(encoding)
+      Boat.create :name => 'lollypop', :cargo => Blob.new
+      Boat.find_by_name 'lollypop'
+
+      Boat.create :name => 'minerva', :cargo => "WRONG KIND"
+      assert_raise ActiveRecord::SerializationTypeMismatch do
+        Boat.find_by_name('minerva').cargo
+      end
+    end
+
+    define_method "test_#{encoding}_simple_hash" do
+      set_encoding(encoding)
+      b = Boat.new
+      h = { :name => 'skipper' }
+      b.captain = h
+      assert_equal h, b.captain
+      b.save
+      assert_equal h, b.captain
+      b.captain[:actor] = 'alan hale'
+      assert_equal 'alan hale', b.captain[:actor]
+    end
+
+    define_method "test_#{encoding}_check_if_really_saved" do
+      set_encoding(encoding)
+      b = Boat.new
+      b.captain = { :name => 'ramius' }
+      b.save
+
+      b2 = Boat.find(b.id)
+      assert_equal b.captain, b2.captain
+      b2.captain[:nationality] = 'russian'
+      b2.save
+
+      b3 = Boat.find(b2.id)
+      assert_equal 'russian', b3.captain[:nationality]
+    end
+
+    define_method "test_#{encoding}_array_cerealize" do
+      set_encoding(encoding)
+      b = Boat.new
+      b.captain = [123, 456]
+      b.save
+      assert_equal [123, 456], b.captain
+      assert_equal [123, 456], Boat.find(b.id).captain
+    end
+
+    define_method "test_#{encoding}_repeated_saves" do
+      set_encoding(encoding)
+      b = Boat.new
+      b.captain = { :name => 'kirk', :age => 23 }
+      b.save
+
+      assert_equal 23, b.captain[:age]
+      assert_equal 23, Boat.first.captain[:age]
+
+      b.captain[:age] += 1
+      b.save
+      assert_equal 24, b.captain[:age]
+      assert_equal 24, Boat.first.captain[:age]
+
+      b.captain[:age] += 1
+      b.save
+      b.captain[:age] += 1
+      b.save
+      assert_equal 26, b.captain[:age]
+      assert_equal 26, Boat.first.captain[:age]
+
+      b.captain[:age] += 1
+      b.save
+      b.captain[:age] += 1
+      b.save
+      b.captain[:age] += 1
+      b.save
+      assert_equal 29, b.captain[:age]
+      assert_equal 29, Boat.first.captain[:age]
+
+    end
   end
 end
