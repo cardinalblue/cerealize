@@ -1,5 +1,6 @@
 = cerealize todo list
 
+* cleanup test cases... use proper way to setup encoding
 * extract options, instead of hardcoded into method closure (block)
 * extract base64 decorator, then we can use pure marshal
 * datamapper support
