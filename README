@@ -11,6 +11,9 @@ by Cardinal Blue ( http://cardinalblue.com )
   Serialize out of the Cerealize Box
   - a drop-in replacement for ActiveRecord's serialize
 
+  It can auto transcode old encoding (yaml if you're using AR's serialize),
+  to new encoding (marshal, json, you name it) without any migration.
+
   Current supported encoding:
   1. YAML
   2. Marshal
@@ -24,7 +27,10 @@ by Cardinal Blue ( http://cardinalblue.com )
 
  require 'cerealize'
  class User < ActiveRecord::Base
-   cerealize :data, Hash, :encoding => :marshal, :force_encoding => true
+   # when force_encoding set to false (this is default), cerealize is
+   # smart enough to transcode old encoding (e.g. yaml) to new encoding
+   # (i.e. marshal)
+   cerealize :data, Hash, :encoding => :marshal, :force_encoding => false
  end
 
 == REQUIREMENTS:
