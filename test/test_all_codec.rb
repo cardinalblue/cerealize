@@ -17,7 +17,7 @@ class AllCodecTest < Test::Unit::TestCase
   def teardown
   end
 
-  [ :yaml, :marshal ].each do |encoding|
+  Cerealize.codec_names.each do |encoding|
 
     define_method "test_#{encoding}_basic" do
       set_encoding(encoding)
