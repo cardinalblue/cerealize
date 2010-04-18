@@ -14,6 +14,6 @@ end
 
 class Boat < ActiveRecord::Base
   include Cerealize
-  marshalize :captain
-  marshalize :cargo, Blob
+  cerealize :captain
+  cerealize :cargo, Blob
 end

@@ -8,7 +8,7 @@ require 'test/helper_active_record'
 
 require 'test/unit'
 
-class MarshalizeTest < Test::Unit::TestCase
+class BasicTest < Test::Unit::TestCase
   def setup
     Boat.delete_all
   end
@@ -17,7 +17,7 @@ class MarshalizeTest < Test::Unit::TestCase
   end
 
   def set_encoding(encoding)
-    Boat.send :marshalize, :captain, nil, :encoding => encoding
+    Boat.send :cerealize, :captain, nil, :encoding => encoding
   end
 
   def test_encoding_yaml
@@ -212,7 +212,7 @@ class MarshalizeTest < Test::Unit::TestCase
     assert_equal 'russian', b3.captain[:nationality]
   end
 
-  def test_array_marshalize
+  def test_array_cerealize
     b = Boat.new
     b.captain = [123, 456]
     b.save

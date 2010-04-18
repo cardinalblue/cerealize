@@ -44,7 +44,7 @@ module Cerealize
 
   module ClassMethods
 
-    def marshalize property, klass=nil, options={}
+    def cerealize property, klass=nil, options={}
       field_pre   = "@#{property}_pre".to_sym
       field_cache = "@#{property}".to_sym
 
