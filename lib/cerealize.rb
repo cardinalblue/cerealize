@@ -1,12 +1,15 @@
 # encoding: utf-8
 
-module Marshalize
-  
+require 'active_record'
+autoload :YAML, 'yaml'
+
+module Cerealize
+
   #
-  # Dirty functionality: note that *_changed? and changed? work, 
+  # Dirty functionality: note that *_changed? and changed? work,
   # but *_was, *_change, and changes do NOT work.
   #
-  
+
   def self.included(base)
     base.send :extend, ClassMethods
   end
@@ -23,7 +26,7 @@ module Marshalize
   def self.yaml_from(s)
     obj && YAML.load(obj)
   end
-  
+
   def self.encode(obj, encoding)
     case encoding
     when :marshal;  marshal_to(obj)
@@ -38,9 +41,9 @@ module Marshalize
     else                      raise "Unknown field format for '#{s}'"
     end
   end
-  
+
   module ClassMethods
-    
+
     def marshalize property, klass=nil, options={}
       field_pre   = "@#{property}_pre".to_sym
       field_cache = "@#{property}".to_sym
@@ -56,21 +59,21 @@ module Marshalize
         # Rails.logger.debug "#{property} (READER)"
 
         # See if no assignment yet
-        if !instance_variable_defined?(field_cache)          
-          
+        if !instance_variable_defined?(field_cache)
+
           # Save property if not already saved
           if !instance_variable_defined?(field_pre)
             instance_variable_set(field_pre, read_attribute(property))
           end
 
           # Set cached from pre
-          v = Marshalize.decode(instance_variable_get(field_pre))
+          v = Cerealize.decode(instance_variable_get(field_pre))
           raise ActiveRecord::SerializationTypeMismatch, "expected #{klass}, got #{v.class}" \
             if klass && !v.nil? && !v.kind_of?(klass)
           instance_variable_set(field_cache, v)
         end
-        
-        # Return cached 
+
+        # Return cached
         instance_variable_get(field_cache)
       end
 
@@ -82,23 +85,23 @@ module Marshalize
         instance_variable_set(field_cache, v)
       end
 
-      # Callback for before_save 
+      # Callback for before_save
       #
       define_method "#{property}_update_if_dirty" do
         # Rails.logger.debug "#{property}_update_if_dirty"
-        
+
         # See if we have a new cur value
         if instance_variable_defined?(field_cache)
           v = instance_variable_get(field_cache)
-          v_enc = Marshalize.encode(v, options[:encoding] || :marshal)
+          v_enc = Cerealize.encode(v, options[:encoding] || :marshal)
 
-          # See if no pre at all (i.e. it was written to before being read), 
+          # See if no pre at all (i.e. it was written to before being read),
           # or if different. When comparing, compare both marshalized string,
           # and Object ==.
           #
           if !instance_variable_defined?(field_pre) ||
-            (v_enc != instance_variable_get(field_pre) && 
-              v != Marshalize.decode(instance_variable_get(field_pre)))
+            (v_enc != instance_variable_get(field_pre) &&
+              v != Cerealize.decode(instance_variable_get(field_pre)))
             write_attribute(property, v_enc)
           end
         end

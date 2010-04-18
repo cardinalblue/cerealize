@@ -11,6 +11,8 @@ proj = 'cerealize'
 require "#{proj}/version"
 
 Bones{
+  ruby_opts [''] # silence warning for now
+
   version Cerealize::VERSION
 
   depend_on 'activerecord',                       :version => '>=2.3.5'
