@@ -32,4 +32,22 @@ class TranscodeTest < Test::Unit::TestCase
       Cat.find(id).tail
     end
   end
+
+  def test_auto_transcode
+    name = 'Nine Tails'
+    marshaled_name = Cerealize::Codec::Marshal.encode(name)
+    cat = Cat.new
+    cat.write_attribute(:name, marshaled_name)
+    cat.save
+    id = cat.id
+
+    new_cat = Cat.find(id)
+    assert_equal name, new_cat.name
+    new_cat.name.reverse!
+
+    assert_equal marshaled_name, new_cat[:name]
+    new_cat.save
+
+    assert Cerealize::Codec::Yaml.yours?(new_cat[:name])
+  end
 end

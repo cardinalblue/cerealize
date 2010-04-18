@@ -20,11 +20,14 @@ module Cerealize
     base.send :extend, ClassMethods
   end
 
+  def self.codecs
+    @codecs ||= Codec.constants.sort.map{ |codec_name|
+                  Codec.const_get(codec_name)
+                }
+  end
+
   def self.codec_detect(str)
-    Codec.constants.sort.each{ |codec_name|
-      codec = Codec.const_get(codec_name)
-      break codec if codec.yours?(str)
-    }
+    codecs.find{ |codec| codec.yours?(str) }
   end
 
   def self.codec_get(codec_name)
