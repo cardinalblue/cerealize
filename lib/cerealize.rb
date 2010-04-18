@@ -28,7 +28,9 @@ module Cerealize
   end
 
   def codec_names
-    codecs.map{ |codec| codec.to_s.sub(/(\w+::)+/, '').downcase.to_sym }
+    @codec_names ||= codecs.map{ |codec|
+                       codec.to_s.sub(/(\w+::)+/, '').downcase.to_sym
+                     }
   end
 
   def codec_detect(str)
