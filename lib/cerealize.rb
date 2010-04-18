@@ -30,7 +30,7 @@ module Cerealize
   def self.codec_get(codec_name)
     Codec.const_get(codec_name.to_s.capitalize)
   rescue NameError
-    raise NoSuchCodec.new(encoding)
+    raise NoSuchCodec.new(codec_name)
   end
 
   def self.encode(obj, codec)
