@@ -20,28 +20,29 @@ module Cerealize
     base.send :extend, ClassMethods
   end
 
-  def self.codecs
+  module_function
+  def codecs
     @codecs ||= Codec.constants.sort.map{ |codec_name|
                   Codec.const_get(codec_name)
                 }
   end
 
-  def self.codec_detect(str)
+  def codec_detect(str)
     codecs.find{ |codec| codec.yours?(str) }
   end
 
-  def self.codec_get(codec_name)
+  def codec_get(codec_name)
     Codec.const_get(codec_name.to_s.capitalize)
   rescue NameError
     raise NoSuchCodec.new(codec_name)
   end
 
-  def self.encode(obj, codec)
+  def encode(obj, codec)
     return nil unless obj
     codec.encode(obj)
   end
 
-  def self.decode(str, codec=nil)
+  def decode(str, codec=nil)
     return nil unless str
     codec ||= codec_detect(str)
 
@@ -125,5 +126,4 @@ module Cerealize
       before_save("#{property}_update_if_dirty")
     end
   end
-end
-
+end # of Cerealize
