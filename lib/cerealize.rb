@@ -15,10 +15,10 @@ module Cerealize
   end
 
   def self.marshal_to(obj)
-    obj && ActiveSupport::Base64.encode64(Marshal.dump(obj))
+    obj && [Marshal.dump(obj)].pack('m*')
   end
   def self.marshal_from(s)
-    s && Marshal.load(ActiveSupport::Base64.decode64(s))
+    s && Marshal.load(s.unpack('m*').first)
   end
   def self.yaml_to(obj)
     obj && obj.to_yaml
