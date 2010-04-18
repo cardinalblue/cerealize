@@ -23,7 +23,7 @@ class TranscodeTest < Test::Unit::TestCase
     end
   end
 
-  def test_no_suitable_codec
+  def test_no_suitable_codec_if_force_encoding
     cat = Cat.new
     cat[:tail] = '---'
     cat.save
@@ -33,7 +33,7 @@ class TranscodeTest < Test::Unit::TestCase
     end
   end
 
-  def test_auto_transcode
+  def test_auto_transcode_yaml
     name = 'Nine Tails'
     marshaled_name = Cerealize::Codec::Marshal.encode(name)
     cat = Cat.new
@@ -45,9 +45,31 @@ class TranscodeTest < Test::Unit::TestCase
     assert_equal name, new_cat.name
     new_cat.name.reverse!
 
+    # no change if not saved yet
     assert_equal marshaled_name, new_cat[:name]
     new_cat.save
 
+    # should be transcode into YAML
     assert Cerealize::Codec::Yaml.yours?(new_cat[:name])
+    new_cat.reload
+    assert Cerealize::Codec::Yaml.yours?(new_cat[:name])
+  end
+
+  def test_auto_transcode_marshal
+    food = {:a => :b}
+    yamled_food = Cerealize::Codec::Yaml.encode(food)
+    cat = Cat.new
+    cat[:food] = yamled_food
+    cat.save
+    cat.reload
+
+    assert_equal food, cat.food
+    assert_equal yamled_food, cat[:food]
+    cat.food.merge!(:c => :d)
+    cat.save
+    cat.reload
+
+    assert Cerealize::Codec::Marshal.yours?(cat[:food])
+    assert_equal food.merge(:c => :d), cat.food
   end
 end
