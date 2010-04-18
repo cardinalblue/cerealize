@@ -42,7 +42,7 @@ module Cerealize
     return nil unless str
     codec ||= codec_detect(str)
 
-    if codec
+    if codec && codec.yours?(str)
       codec.decode(str)
     else
       raise NoSuitableCodec.new("#{str[0..46]}...")
@@ -76,7 +76,8 @@ module Cerealize
           end
 
           # Set cached from pre
-          v = Cerealize.decode(instance_variable_get(field_pre))
+          v = Cerealize.decode(instance_variable_get(field_pre),
+                               force_encoding && codec )
           raise ActiveRecord::SerializationTypeMismatch, "expected #{klass}, got #{v.class}" \
             if klass && !v.nil? && !v.kind_of?(klass)
           instance_variable_set(field_cache, v)

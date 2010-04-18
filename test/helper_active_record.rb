@@ -5,6 +5,12 @@ ActiveRecord::Base.establish_connection(
   :database => ':memory:'
 )
 
+class Boat < ActiveRecord::Base
+  include Cerealize
+  cerealize :captain
+  cerealize :cargo, Blob
+end
+
 ActiveRecord::Base.connection.create_table :boats, :force => true do |t|
   t.string  :name
   t.integer :tonnage
@@ -12,8 +18,15 @@ ActiveRecord::Base.connection.create_table :boats, :force => true do |t|
   t.string  :cargo
 end
 
-class Boat < ActiveRecord::Base
+
+
+class Cat < ActiveRecord::Base
   include Cerealize
-  cerealize :captain
-  cerealize :cargo, Blob
+  cerealize :name, String, :encoding => :yaml
+  cerealize :tail, Array,  :encoding => :marshal, :force_encoding => true
+end
+
+ActiveRecord::Base.connection.create_table :cats, :force => true do |t|
+  t.text :name
+  t.text :tail
 end
