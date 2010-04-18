@@ -4,6 +4,12 @@ require 'active_record'
 autoload :YAML, 'yaml'
 
 module Cerealize
+  module Codec
+    autoload 'Yaml',    'cerealize/codec/yaml'
+    autoload 'Marshal', 'cerealize/codec/marshal'
+  end
+  class UnknownEncoding   < ArgumentError; end
+  class UnknownDataFormat < RuntimeError ; end
 
   #
   # Dirty functionality: note that *_changed? and changed? work,
@@ -14,31 +20,24 @@ module Cerealize
     base.send :extend, ClassMethods
   end
 
-  def self.marshal_to(obj)
-    obj && [Marshal.dump(obj)].pack('m*')
-  end
-  def self.marshal_from(s)
-    s && Marshal.load(s.unpack('m*').first)
-  end
-  def self.yaml_to(obj)
-    obj && obj.to_yaml
-  end
-  def self.yaml_from(s)
-    obj && YAML.load(obj)
+  def self.encode(obj, encoding)
+    return nil unless obj
+    Codec.const_get(encoding.to_s.capitalize).encode(obj)
+  rescue NameError
+    raise UnknownEncoding.new(encoding)
   end
 
-  def self.encode(obj, encoding)
-    case encoding
-    when :marshal;  marshal_to(obj)
-    when :yaml;     yaml_to(obj)
-    else            raise "invalid encoding #{encoding}"
-    end
-  end
-  def self.decode(s)
-    if s.nil?;                nil
-    elsif s[0..2] == '---';   YAML.load(s)    # See YAML spec (though might fail if "directives"?)
-    elsif s[0..1] == 'BA';    marshal_from(s) # Version 4.8 of Marshalize always base64s to "BA"
-    else                      raise "Unknown field format for '#{s}'"
+  def self.decode(str)
+    return nil unless str
+    codec = Codec.constants.sort.each{ |codec_name|
+              codec = Codec.const_get(codec_name)
+              break codec if codec.yours?(str)
+            }
+
+    if codec
+      codec.decode(str)
+    else
+      raise UnknownDataFormat.new(str)
     end
   end
 
