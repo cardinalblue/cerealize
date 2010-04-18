@@ -1,49 +1,12 @@
 # encoding: utf-8
 
+require 'rubygems' if RUBY_VERSION < '1.9.1'
 require 'cerealize'
+
+require 'test/stub'
+require 'test/helper_active_record'
+
 require 'test/unit'
-
-class Person
-  def initialize(name, age=nil)
-    self.name = name
-    self.age  = age
-  end
-
-  ATTR = [ :name, :age, :hat, :pocket ]
-  attr_accessor(*ATTR)
-
-  def ==(other)
-    ATTR.all?{|m| send(m) == other.send(m) }
-  end
-  def eql?(other)
-    ATTR.all?{|m| send(m).eql? other.send(m) }
-  end
-end
-
-class Hat
-  def initialize(color); self.color = color; end
-  attr_accessor :color
-end
-
-class Blob; end
-
-ActiveRecord::Base.establish_connection(
-  :adapter  => 'sqlite3',
-  :database => ':memory:'
-)
-
-ActiveRecord::Base.connection.create_table :boats, :force => true do |t|
-  t.string  :name
-  t.integer :tonnage
-  t.string  :captain
-  t.string  :cargo
-end
-
-class Boat < ActiveRecord::Base
-  include Cerealize
-  marshalize :captain
-  marshalize :cargo, Blob
-end
 
 class MarshalizeTest < Test::Unit::TestCase
   def setup
