@@ -8,8 +8,8 @@ module Cerealize
     autoload 'Yaml',    'cerealize/codec/yaml'
     autoload 'Marshal', 'cerealize/codec/marshal'
   end
-  class UnknownEncoding   < ArgumentError; end
-  class UnknownDataFormat < RuntimeError ; end
+  class NoSuchCodec     < ArgumentError; end
+  class NoSuitableCodec < RuntimeError ; end
 
   #
   # Dirty functionality: note that *_changed? and changed? work,
@@ -31,7 +31,7 @@ module Cerealize
     return nil unless obj
     Codec.const_get(encoding.to_s.capitalize).encode(obj)
   rescue NameError
-    raise UnknownEncoding.new(encoding)
+    raise NoSuchCodec.new(encoding)
   end
 
   def self.decode(str, codec = nil)
@@ -41,7 +41,7 @@ module Cerealize
     if codec
       codec.decode(str)
     else
-      raise UnknownDataFormat.new(str)
+      raise NoSuitableCodec.new("#{str[0..46]}...")
     end
   end
 
