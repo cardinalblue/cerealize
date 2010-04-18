@@ -9,19 +9,28 @@ by Cardinal Blue ( http://cardinalblue.com )
 == DESCRIPTION:
 
   Serialize out of the Cerealize Box
-  cerealize - a drop-in replacement for ActiveRecord's serialize
-  DataMapper support planed.
+  - a drop-in replacement for ActiveRecord's serialize
+
+  Current supported encoding:
+  1. YAML
+  2. Marshal
+  3. JSON (planned)
+
+  Current supported ORM:
+  1. ActiveRecord (tested with 2.3.5)
+  2. DataMapper (planned)
 
 == SYNOPSIS:
 
  require 'cerealize'
  class User < ActiveRecord::Base
-   cerealize :data, Hash, :encoding => :marshal
+   cerealize :data, Hash, :encoding => :marshal, :force_encoding => true
  end
 
 == REQUIREMENTS:
 
-* activerecord currently, dm-core support planed.
+* tested with MRI 1.8.7 and 1.9.1
+* one of your desired ORM
 
 == INSTALL:
 
@@ -33,7 +42,7 @@ or
 
   Apache License 2.0
 
-  Copyright (c) 2008-2009, Lin Jen-Shin (aka godfat 真常)
+  Copyright (c) 2010, Cardinal Blue
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
