@@ -20,23 +20,27 @@ module Cerealize
     base.send :extend, ClassMethods
   end
 
-  def self.detect_codec(str)
+  def self.codec_detect(str)
     Codec.constants.sort.each{ |codec_name|
       codec = Codec.const_get(codec_name)
       break codec if codec.yours?(str)
     }
   end
 
-  def self.encode(obj, encoding)
-    return nil unless obj
-    Codec.const_get(encoding.to_s.capitalize).encode(obj)
+  def self.codec_get(codec_name)
+    Codec.const_get(codec_name.to_s.capitalize)
   rescue NameError
     raise NoSuchCodec.new(encoding)
   end
 
-  def self.decode(str, codec = nil)
+  def self.encode(obj, codec)
+    return nil unless obj
+    codec.encode(obj)
+  end
+
+  def self.decode(str, codec=nil)
     return nil unless str
-    codec = detect_codec(str) unless codec
+    codec = codec_detect(str) unless codec
 
     if codec
       codec.decode(str)
