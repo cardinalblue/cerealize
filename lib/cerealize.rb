@@ -20,6 +20,13 @@ module Cerealize
     base.send :extend, ClassMethods
   end
 
+  def self.detect_codec(str)
+    Codec.constants.sort.each{ |codec_name|
+      codec = Codec.const_get(codec_name)
+      break codec if codec.yours?(str)
+    }
+  end
+
   def self.encode(obj, encoding)
     return nil unless obj
     Codec.const_get(encoding.to_s.capitalize).encode(obj)
@@ -27,12 +34,9 @@ module Cerealize
     raise UnknownEncoding.new(encoding)
   end
 
-  def self.decode(str)
+  def self.decode(str, codec = nil)
     return nil unless str
-    codec = Codec.constants.sort.each{ |codec_name|
-              codec = Codec.const_get(codec_name)
-              break codec if codec.yours?(str)
-            }
+    codec = detect_codec(str) unless codec
 
     if codec
       codec.decode(str)
