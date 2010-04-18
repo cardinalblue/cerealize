@@ -40,7 +40,7 @@ module Cerealize
 
   def self.decode(str, codec=nil)
     return nil unless str
-    codec = codec_detect(str) unless codec
+    codec ||= codec_detect(str)
 
     if codec
       codec.decode(str)
