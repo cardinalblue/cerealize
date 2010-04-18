@@ -54,6 +54,8 @@ module Cerealize
     def cerealize property, klass=nil, options={}
       field_pre   = "@#{property}_pre".to_sym
       field_cache = "@#{property}".to_sym
+      codec       = Cerealize.codec_get(options[:encoding] || :marshal)
+      force_encoding  = options[:force_encoding]
 
       # Invariants:
       #   - instance_variable_defined?(field_cache)  IFF the READER or WRITER has been called
@@ -100,7 +102,7 @@ module Cerealize
         # See if we have a new cur value
         if instance_variable_defined?(field_cache)
           v = instance_variable_get(field_cache)
-          v_enc = Cerealize.encode(v, options[:encoding] || :marshal)
+          v_enc = Cerealize.encode(v, codec)
 
           # See if no pre at all (i.e. it was written to before being read),
           # or if different. When comparing, compare both marshalized string,
@@ -108,7 +110,8 @@ module Cerealize
           #
           if !instance_variable_defined?(field_pre) ||
             (v_enc != instance_variable_get(field_pre) &&
-              v != Cerealize.decode(instance_variable_get(field_pre)))
+              v != Cerealize.decode(instance_variable_get(field_pre),
+                                    force_encoding && codec ))
             write_attribute(property, v_enc)
           end
         end
