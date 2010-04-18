@@ -5,7 +5,7 @@ module Cerealize
     module_function
 
     # See YAML spec (though might fail if "directives"?)
-    def yours? str
+    def yours?(str)
       str[0..2] == '---'
     end
 
