@@ -25,7 +25,7 @@ class TranscodeTest < Test::Unit::TestCase
 
   def test_no_suitable_codec
     cat = Cat.new
-    cat.write_attribute(:tail, '---')
+    cat[:tail] = '---'
     cat.save
     id = cat.id
     assert_raise Cerealize::NoSuitableCodec do
@@ -37,7 +37,7 @@ class TranscodeTest < Test::Unit::TestCase
     name = 'Nine Tails'
     marshaled_name = Cerealize::Codec::Marshal.encode(name)
     cat = Cat.new
-    cat.write_attribute(:name, marshaled_name)
+    cat[:name] = marshaled_name
     cat.save
     id = cat.id
 
