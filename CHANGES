@@ -1,4 +1,8 @@
 = cerealize changes history
 
+== cerealize 0.8.1 -- ?
+* module_eval is a lot faster than define_method with a block,
+  i think it's all about closure
+
 == cerealize 0.8.0 -- 2010-04-18
 * release early, release often
