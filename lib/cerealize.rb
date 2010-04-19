@@ -57,13 +57,25 @@ module Cerealize
     end
   end
 
-  module ClassMethods
+  def cerealize_decode property, field_pre
+    opt = self.class.cerealize_option[property]
+    Cerealize.decode( instance_variable_get(field_pre),
+                      opt[:force_encoding] && opt[:codec] )
+  end
 
-    def cerealize property, klass=nil, options={}
+  module ClassMethods
+    def cerealize_option
+      @cerealize_option ||= {}
+    end
+
+    def cerealize property, klass=nil, option={}
+      cerealize_option[property] =
+        option.merge(:class => klass,
+                     :codec => Cerealize.codec_get(
+                                 option[:encoding] || :marshal))
+
       field_pre   = "@#{property}_pre".to_sym
       field_cache = "@#{property}".to_sym
-      codec       = Cerealize.codec_get(options[:encoding] || :marshal)
-      force_encoding  = options[:force_encoding]
 
       # Invariants:
       #   - instance_variable_defined?(field_cache)  IFF the READER or WRITER has been called
@@ -84,8 +96,7 @@ module Cerealize
           end
 
           # Set cached from pre
-          v = Cerealize.decode(instance_variable_get(field_pre),
-                               force_encoding && codec )
+          v = cerealize_decode(property, field_pre)
           raise ActiveRecord::SerializationTypeMismatch, "expected #{klass}, got #{v.class}" \
             if klass && !v.nil? && !v.kind_of?(klass)
           instance_variable_set(field_cache, v)
@@ -111,7 +122,8 @@ module Cerealize
         # See if we have a new cur value
         if instance_variable_defined?(field_cache)
           v = instance_variable_get(field_cache)
-          v_enc = Cerealize.encode(v, codec)
+          v_enc = Cerealize.encode(v,
+                    self.class.cerealize_option[property][:codec])
 
           # See if no pre at all (i.e. it was written to before being read),
           # or if different. When comparing, compare both marshalized string,
@@ -119,8 +131,7 @@ module Cerealize
           #
           if !instance_variable_defined?(field_pre) ||
             (v_enc != instance_variable_get(field_pre) &&
-              v != Cerealize.decode(instance_variable_get(field_pre),
-                                    force_encoding && codec ))
+                 v != cerealize_decode(property, field_pre))
             write_attribute(property, v_enc)
           end
         end
