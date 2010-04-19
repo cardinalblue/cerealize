@@ -31,4 +31,21 @@ class BasicTest < Test::Unit::TestCase
     assert s[0..1] = 'BA'
   end
 
+  def test_cerealize_option
+    assert_equal({:name => {:class    => String,
+                            :encoding => :yaml,
+                            :codec    => Cerealize::Codec::Yaml},
+
+                  :tail => {:class    => Array,
+                            :encoding => :marshal,
+                            :codec    => Cerealize::Codec::Marshal,
+                            :force_encoding => true},
+
+                  :food => {:class    => Hash,
+                            :encoding => :marshal,
+                            :codec    => Cerealize::Codec::Marshal,
+                            :force_encoding => false}},
+                 Cat.cerealize_option)
+  end
+
 end

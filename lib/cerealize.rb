@@ -75,11 +75,11 @@ module Cerealize
       @cerealize_option ||= {}
     end
 
-    def cerealize property, klass=nil, option={}
+    def cerealize property, klass=nil, opt={}
+      opt[:encoding] ||= :marshal
       cerealize_option[property] =
-        option.merge(:class => klass,
-                     :codec => Cerealize.codec_get(
-                                 option[:encoding] || :marshal))
+        opt.merge(:class => klass,
+                  :codec => Cerealize.codec_get(opt[:encoding]))
 
       field_pre   = "@#{property}_pre".to_sym
       field_cache = "@#{property}".to_sym
