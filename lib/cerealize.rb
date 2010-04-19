@@ -106,23 +106,19 @@ module Cerealize
       #
       module_eval <<-RUBY, __FILE__, __LINE__ + 1
         def #{property}
-          # See if no assignment yet
-          if !#{field_cache}
-
-            # Save property if not already saved
-            if !#{field_orig}
-              self.#{field_orig}= self[:#{property}]
-            end
-
-            # Set cached from pre
-            v = cerealize_decode(:#{property}, #{field_orig})
-            raise ActiveRecord::SerializationTypeMismatch, "expected #{klass}, got \#{v.class}" \\
-              if #{klass || 'nil'} && !v.nil? && !v.kind_of?(#{klass})
-            self.#{field_cache} = v
-          end
-
           # Return cached
-          #{field_cache}
+          return #{field_cache} if #{field_cache}
+
+          # No assignment yet, save property if not already saved
+          self.#{field_orig}= self[:#{property}] if !#{field_orig}
+
+          # Set cached from pre
+          value = cerealize_decode(:#{property}, #{field_orig})
+
+          raise ActiveRecord::SerializationTypeMismatch, "expected #{klass}, got \#{value.class}" \\
+            if #{klass.inspect} && !value.nil? && !value.kind_of?(#{klass})
+
+          self.#{field_cache} = value
         end
       RUBY
 
