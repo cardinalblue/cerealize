@@ -57,10 +57,14 @@ module Cerealize
     end
   end
 
-  def cerealize_decode property, field_pre
+  def cerealize_decode property, value
     opt = self.class.cerealize_option[property]
-    Cerealize.decode( instance_variable_get(field_pre),
-                      opt[:force_encoding] && opt[:codec] )
+    Cerealize.decode( value, opt[:force_encoding] && opt[:codec] )
+  end
+
+  def cerealize_encode property, value
+    opt = self.class.cerealize_option[property]
+    Cerealize.encode( value, opt[:codec] )
   end
 
   module ClassMethods
@@ -96,7 +100,7 @@ module Cerealize
           end
 
           # Set cached from pre
-          v = cerealize_decode(property, field_pre)
+          v = cerealize_decode(property, instance_variable_get(field_pre))
           raise ActiveRecord::SerializationTypeMismatch, "expected #{klass}, got #{v.class}" \
             if klass && !v.nil? && !v.kind_of?(klass)
           instance_variable_set(field_cache, v)
@@ -122,8 +126,7 @@ module Cerealize
         # See if we have a new cur value
         if instance_variable_defined?(field_cache)
           v = instance_variable_get(field_cache)
-          v_enc = Cerealize.encode(v,
-                    self.class.cerealize_option[property][:codec])
+          v_enc = cerealize_encode(property, v)
 
           # See if no pre at all (i.e. it was written to before being read),
           # or if different. When comparing, compare both marshalized string,
@@ -131,7 +134,7 @@ module Cerealize
           #
           if !instance_variable_defined?(field_pre) ||
             (v_enc != instance_variable_get(field_pre) &&
-                 v != cerealize_decode(property, field_pre))
+                 v != cerealize_decode(property, instance_variable_get(field_pre)))
             write_attribute(property, v_enc)
           end
         end
