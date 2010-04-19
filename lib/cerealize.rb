@@ -81,8 +81,11 @@ module Cerealize
         opt.merge(:class => klass,
                   :codec => Cerealize.codec_get(opt[:encoding]))
 
-      field_pre   = "@#{property}_pre".to_sym
-      field_cache = "@#{property}".to_sym
+      field_orig  = "#{property}_pre"
+      field_cache = "@#{property}"
+
+      attr_accessor field_orig
+      private field_orig, "#{field_orig}="
 
       # Invariants:
       #   - instance_variable_defined?(field_cache)  IFF the READER or WRITER has been called
@@ -98,12 +101,12 @@ module Cerealize
         if !instance_variable_defined?(field_cache)
 
           # Save property if not already saved
-          if !instance_variable_defined?(field_pre)
-            instance_variable_set(field_pre, read_attribute(property))
+          if !send(field_orig)
+            send("#{field_orig}=", self[property])
           end
 
           # Set cached from pre
-          v = cerealize_decode(property, instance_variable_get(field_pre))
+          v = cerealize_decode(property, send(field_orig))
           raise ActiveRecord::SerializationTypeMismatch, "expected #{klass}, got #{v.class}" \
             if klass && !v.nil? && !v.kind_of?(klass)
           instance_variable_set(field_cache, v)
@@ -135,13 +138,13 @@ module Cerealize
           # or if different. When comparing, compare both marshalized string,
           # and Object ==.
           #
-          if !instance_variable_defined?(field_pre) ||
-            (v_enc != instance_variable_get(field_pre) &&
-                 v != cerealize_decode(property, instance_variable_get(field_pre)))
+          if !send(field_orig) ||
+            (v_enc != send(field_orig) &&
+                 v != cerealize_decode(property, send(field_orig)))
             write_attribute(property, v_enc)
           end
         end
-        remove_instance_variable(field_pre)   if instance_variable_defined?(field_pre)
+        send("#{field_orig}=", nil)
         remove_instance_variable(field_cache) if instance_variable_defined?(field_cache)
       end
       before_save("#{property}_update_if_dirty")
