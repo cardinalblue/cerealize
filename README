@@ -8,30 +8,30 @@ by Cardinal Blue ( http://cardinalblue.com )
 
 == DESCRIPTION:
 
-  Serialize out of the Cerealize Box
-  - a drop-in replacement for ActiveRecord's serialize
+ Serialize out of the Cerealize Box
+ - a drop-in replacement for ActiveRecord's serialize
 
-  It can auto transcode old encoding (yaml if you're using AR's serialize),
-  to new encoding (marshal, json, you name it) without any migration.
+ It can auto transcode old encoding (yaml if you're using AR's serialize),
+ to new encoding (marshal, json, you name it) without any migration.
 
-  Current supported encoding:
-  1. YAML
-  2. Marshal
-  3. JSON (planned)
+ Current supported encoding:
+ 1. YAML
+ 2. Marshal
+ 3. JSON (planned)
 
-  Current supported ORM:
-  1. ActiveRecord (tested with 2.3.5)
-  2. DataMapper (planned)
+ Current supported ORM:
+ 1. ActiveRecord (tested with 2.3.5)
+ 2. DataMapper (planned)
 
 == SYNOPSIS:
 
-  require 'cerealize'
-  class User < ActiveRecord::Base
-    # when force_encoding set to false (this is default), cerealize is
-    # smart enough to transcode old encoding (e.g. yaml) to new encoding
-    # (i.e. marshal)
-    cerealize :data, Hash, :encoding => :marshal, :force_encoding => false
-  end
+ require 'cerealize'
+ class User < ActiveRecord::Base
+   # when force_encoding set to false (this is default), cerealize is
+   # smart enough to transcode old encoding (e.g. yaml) to new encoding
+   # (i.e. marshal)
+   cerealize :data, Hash, :encoding => :marshal, :force_encoding => false
+ end
 
 == REQUIREMENTS:
 
@@ -40,9 +40,9 @@ by Cardinal Blue ( http://cardinalblue.com )
 
 == INSTALL:
 
-  > gem install cerealize
-  # or if you want rails plugin and bleeding edge
-  > script/plugin install git://github.com/cardinalblue/cerealize.git
+ > gem install cerealize
+ # or if you want rails plugin and bleeding edge
+ > script/plugin install git://github.com/cardinalblue/cerealize.git
 
 == LICENSE:
 
