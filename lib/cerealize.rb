@@ -81,11 +81,21 @@ module Cerealize
         opt.merge(:class => klass,
                   :codec => Cerealize.codec_get(opt[:encoding]))
 
-      field_orig  = "#{property}_pre"
-      field_cache = "@#{property}"
+      field_orig  = "#{property}_orig"
+      field_cache = "#{property}_cache"
 
       attr_accessor field_orig
       private field_orig, "#{field_orig}="
+
+      module_eval <<-RUBY
+        def #{field_cache}
+          @#{property}
+        end
+
+        def #{field_cache}=(new_value)
+          @#{property} = new_value
+        end
+      RUBY
 
       # Invariants:
       #   - instance_variable_defined?(field_cache)  IFF the READER or WRITER has been called
@@ -94,59 +104,61 @@ module Cerealize
 
       # READER method
       #
-      define_method property do
-        # Rails.logger.debug "#{property} (READER)"
+      module_eval <<-RUBY, __FILE__, __LINE__ + 1
+        def #{property}
+          # See if no assignment yet
+          if !#{field_cache}
 
-        # See if no assignment yet
-        if !instance_variable_defined?(field_cache)
+            # Save property if not already saved
+            if !#{field_orig}
+              self.#{field_orig}= self[:#{property}]
+            end
 
-          # Save property if not already saved
-          if !send(field_orig)
-            send("#{field_orig}=", self[property])
+            # Set cached from pre
+            v = cerealize_decode(:#{property}, #{field_orig})
+            raise ActiveRecord::SerializationTypeMismatch, "expected #{klass}, got \#{v.class}" \\
+              if #{klass || 'nil'} && !v.nil? && !v.kind_of?(#{klass})
+            self.#{field_cache} = v
           end
 
-          # Set cached from pre
-          v = cerealize_decode(property, send(field_orig))
-          raise ActiveRecord::SerializationTypeMismatch, "expected #{klass}, got #{v.class}" \
-            if klass && !v.nil? && !v.kind_of?(klass)
-          instance_variable_set(field_cache, v)
+          # Return cached
+          #{field_cache}
         end
-
-        # Return cached
-        instance_variable_get(field_cache)
-      end
+      RUBY
 
       # WRITER method
       #
-      define_method "#{property}=" do |v|
-        # Rails.logger.debug "#{property}=#{v}"
-        send "#{property}_will_change!" if instance_variable_get(field_cache) != v
-        instance_variable_set(field_cache, v)
-      end
+      module_eval <<-RUBY, __FILE__, __LINE__ + 1
+        def #{property}=(v)
+          #{property}_will_change! if #{field_cache} != v
+          self.#{field_cache} = v
+        end
+      RUBY
 
       # Callback for before_save
       #
-      define_method "#{property}_update_if_dirty" do
-        # Rails.logger.debug "#{property}_update_if_dirty"
+      module_eval <<-RUBY, __FILE__, __LINE__ + 1
+        def #{property}_update_if_dirty
+          # See if we have a new cur value
+          if #{field_cache}
+            v = #{field_cache}
+            v_enc = cerealize_encode(:#{property}, v)
 
-        # See if we have a new cur value
-        if instance_variable_defined?(field_cache)
-          v = instance_variable_get(field_cache)
-          v_enc = cerealize_encode(property, v)
-
-          # See if no pre at all (i.e. it was written to before being read),
-          # or if different. When comparing, compare both marshalized string,
-          # and Object ==.
-          #
-          if !send(field_orig) ||
-            (v_enc != send(field_orig) &&
-                 v != cerealize_decode(property, send(field_orig)))
-            write_attribute(property, v_enc)
+            # See if no pre at all (i.e. it was written to before being read),
+            # or if different. When comparing, compare both marshalized string,
+            # and Object ==.
+            #
+            if !#{field_orig} ||
+              (v_enc != #{field_orig} &&
+                   v != cerealize_decode(:#{property}, #{field_orig}))
+              self[:#{property}] = v_enc
+            end
           end
+          self.#{field_orig}  = nil
+          self.#{field_cache} = nil
         end
-        send("#{field_orig}=", nil)
-        remove_instance_variable(field_cache) if instance_variable_defined?(field_cache)
-      end
+      RUBY
+
       before_save("#{property}_update_if_dirty")
     end
   end
