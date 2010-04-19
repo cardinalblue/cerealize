@@ -2,8 +2,7 @@
 
 = ?
 
-* cleanup test cases... use proper way to setup encoding
-* extract options, instead of hardcoded into method closure (block)
+* cleanup test cases...
 
 = 1.1+
 
