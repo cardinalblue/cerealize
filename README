@@ -3,8 +3,8 @@ by Cardinal Blue ( http://cardinalblue.com )
 
 == LINKS:
 
-* github[http://github.com/cardinalblue/cerealize]
-* rubygems[http://rubygems.org/gems/cerealize]
+* {github}[http://github.com/cardinalblue/cerealize]
+* {rubygems}[http://rubygems.org/gems/cerealize]
 
 == DESCRIPTION:
 
@@ -25,24 +25,24 @@ by Cardinal Blue ( http://cardinalblue.com )
 
 == SYNOPSIS:
 
- require 'cerealize'
- class User < ActiveRecord::Base
-   # when force_encoding set to false (this is default), cerealize is
-   # smart enough to transcode old encoding (e.g. yaml) to new encoding
-   # (i.e. marshal)
-   cerealize :data, Hash, :encoding => :marshal, :force_encoding => false
- end
+  require 'cerealize'
+  class User < ActiveRecord::Base
+    # when force_encoding set to false (this is default), cerealize is
+    # smart enough to transcode old encoding (e.g. yaml) to new encoding
+    # (i.e. marshal)
+    cerealize :data, Hash, :encoding => :marshal, :force_encoding => false
+  end
 
 == REQUIREMENTS:
 
-* tested with MRI 1.8.7 and 1.9.1
-* one of your desired ORM
+  * tested with MRI 1.8.7 and 1.9.1
+  * one of your desired ORM
 
 == INSTALL:
 
-> gem install cerealize
-or
-> script/plugin install git://github.com/cardinalblue/cerealize.git
+  > gem install cerealize
+  # or if you want rails plugin and bleeding edge
+  > script/plugin install git://github.com/cardinalblue/cerealize.git
 
 == LICENSE:
 
