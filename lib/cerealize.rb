@@ -17,7 +17,8 @@ module Cerealize
   #
 
   def self.included(base)
-    base.send :extend, ClassMethods
+    base.send( :extend,    ClassMethods)
+    base.send(:include, InstanceMethods)
   end
 
   module_function
@@ -57,14 +58,16 @@ module Cerealize
     end
   end
 
-  def cerealize_decode property, value
-    opt = self.class.cerealize_option[property]
-    Cerealize.decode( value, opt[:force_encoding] && opt[:codec] )
-  end
+  module InstanceMethods
+    def cerealize_decode property, value
+      opt = self.class.cerealize_option[property]
+      Cerealize.decode( value, opt[:force_encoding] && opt[:codec] )
+    end
 
-  def cerealize_encode property, value
-    opt = self.class.cerealize_option[property]
-    Cerealize.encode( value, opt[:codec] )
+    def cerealize_encode property, value
+      opt = self.class.cerealize_option[property]
+      Cerealize.encode( value, opt[:codec] )
+    end
   end
 
   module ClassMethods
