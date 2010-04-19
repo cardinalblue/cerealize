@@ -35,8 +35,8 @@ by Cardinal Blue ( http://cardinalblue.com )
 
 == REQUIREMENTS:
 
-  * tested with MRI 1.8.7 and 1.9.1
-  * one of your desired ORM
+* tested with MRI 1.8.7 and 1.9.1
+* one of your desired ORM
 
 == INSTALL:
 
