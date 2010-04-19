@@ -75,6 +75,12 @@ module Cerealize
       @cerealize_option ||= {}
     end
 
+    def cerealize_update_codec_cache
+      cerealize_option.each{ |(property, opt)|
+        opt.merge!(:codec => Cerealize.codec_get(opt[:encoding]))
+      }
+    end
+
     def cerealize property, klass=nil, opt={}
       opt[:encoding] ||= :marshal
       cerealize_option[property] =

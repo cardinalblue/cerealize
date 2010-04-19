@@ -1,5 +1,7 @@
 # encoding: utf-8
 
 def set_encoding(encoding)
-  Boat.send :cerealize, :captain, nil, :encoding => encoding
+  Boat.cerealize_option[:captain] = {:class    => nil,
+                                     :encoding => encoding}
+  Boat.cerealize_update_codec_cache
 end
