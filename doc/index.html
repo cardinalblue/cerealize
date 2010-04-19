@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+	<title> cerealize-0.8.0 Documentation</title>
+
+	<link type="text/css" media="screen" href="rdoc.css" rel="stylesheet" />
+
+	<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/thickbox-compressed.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/quicksearch.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/darkfish.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+<body class="indexpage">
+
+	
+	<h1> cerealize-0.8.0 Documentation</h1>
+
+	
+	<div id="main">
+		
+<p>
+by Cardinal Blue ( <a href="http://cardinalblue.com">cardinalblue.com</a> )
+</p>
+<h2>LINKS:</h2>
+<ul>
+<li><p>
+<a href="http://github.com/cardinalblue/cerealize">github</a>
+</p>
+</li>
+<li><p>
+<a href="http://rubygems.org/gems/cerealize">rubygems</a>
+</p>
+</li>
+</ul>
+<h2>DESCRIPTION:</h2>
+<pre>
+ Serialize out of the Cerealize Box
+ * a drop-in replacement for ActiveRecord's serialize
+
+ It can auto transcode old encoding (yaml if you're using AR's serialize),
+ to new encoding (marshal, json, you name it) without any migration.
+
+ Current supported encoding:
+ 1. YAML
+ 2. Marshal
+ 3. JSON (planned)
+
+ Current supported ORM:
+ 1. ActiveRecord (tested with 2.3.5)
+ 2. DataMapper (planned)
+</pre>
+<h2>SYNOPSIS:</h2>
+<pre>
+ require 'cerealize'
+ class User &lt; ActiveRecord::Base
+   # when force_encoding set to false (this is default), cerealize is
+   # smart enough to transcode old encoding (e.g. yaml) to new encoding
+   # (i.e. marshal)
+   cerealize :data, Hash, :encoding =&gt; :marshal, :force_encoding =&gt; false
+ end
+</pre>
+<h2>REQUIREMENTS:</h2>
+<ul>
+<li><p>
+tested with MRI 1.8.7 and 1.9.1
+</p>
+</li>
+<li><p>
+one of your desired ORM
+</p>
+</li>
+</ul>
+<h2>INSTALL:</h2>
+<p>
+> gem install cerealize # or if you want rails plugin and bleeding edge >
+script/plugin install git://github.com/cardinalblue/cerealize.git
+</p>
+<h2>LICENSE:</h2>
+<pre>
+  Apache License 2.0
+
+  Copyright (c) 2010, Cardinal Blue
+
+  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.</pre>
+
+	</div>
+	
+
+	
+	
+	<h2>Files</h2>
+	<ul>
+		
+			<li class="file"><a href="CHANGES.html">CHANGES</a></li>
+		
+			<li class="file"><a href="LICENSE.html">LICENSE</a></li>
+		
+			<li class="file"><a href="README.html">README</a></li>
+		
+			<li class="file"><a href="TODO.html">TODO</a></li>
+		
+	</ul>
+	
+
+	<h2 id="classes">Classes/Modules</h2>
+	<ul>
+		
+		<li class="module"><a href="Cerealize.html">Cerealize</a></li>
+		
+		<li class="module"><a href="Cerealize/ClassMethods.html">Cerealize::ClassMethods</a></li>
+		
+		<li class="module"><a href="Cerealize/Codec.html">Cerealize::Codec</a></li>
+		
+		<li class="module"><a href="Cerealize/Codec/Marshal.html">Cerealize::Codec::Marshal</a></li>
+		
+		<li class="module"><a href="Cerealize/Codec/Yaml.html">Cerealize::Codec::Yaml</a></li>
+		
+		<li class="module"><a href="Cerealize/InstanceMethods.html">Cerealize::InstanceMethods</a></li>
+		
+		<li class="class"><a href="Cerealize/NoSuchCodec.html">Cerealize::NoSuchCodec</a></li>
+		
+		<li class="class"><a href="Cerealize/NoSuitableCodec.html">Cerealize::NoSuitableCodec</a></li>
+		
+	</ul>
+
+	<h2 id="methods">Methods</h2>
+	<ul>
+		
+			<li><a href="Cerealize.html#M000000">::included &mdash; Cerealize</a></li>
+		
+			<li><a href="Cerealize/ClassMethods.html#M000010">#cerealize &mdash; Cerealize::ClassMethods</a></li>
+		
+			<li><a href="Cerealize/InstanceMethods.html#M000007">#cerealize_decode &mdash; Cerealize::InstanceMethods</a></li>
+		
+			<li><a href="Cerealize/InstanceMethods.html#M000008">#cerealize_encode &mdash; Cerealize::InstanceMethods</a></li>
+		
+			<li><a href="Cerealize/ClassMethods.html#M000009">#cerealize_option &mdash; Cerealize::ClassMethods</a></li>
+		
+			<li><a href="Cerealize.html#M000003">#codec_detect &mdash; Cerealize</a></li>
+		
+			<li><a href="Cerealize.html#M000004">#codec_get &mdash; Cerealize</a></li>
+		
+			<li><a href="Cerealize.html#M000002">#codec_names &mdash; Cerealize</a></li>
+		
+			<li><a href="Cerealize.html#M000001">#codecs &mdash; Cerealize</a></li>
+		
+			<li><a href="Cerealize.html#M000006">#decode &mdash; Cerealize</a></li>
+		
+			<li><a href="Cerealize/Codec/Yaml.html#M000016">#decode &mdash; Cerealize::Codec::Yaml</a></li>
+		
+			<li><a href="Cerealize/Codec/Marshal.html#M000013">#decode &mdash; Cerealize::Codec::Marshal</a></li>
+		
+			<li><a href="Cerealize/Codec/Marshal.html#M000012">#encode &mdash; Cerealize::Codec::Marshal</a></li>
+		
+			<li><a href="Cerealize/Codec/Yaml.html#M000015">#encode &mdash; Cerealize::Codec::Yaml</a></li>
+		
+			<li><a href="Cerealize.html#M000005">#encode &mdash; Cerealize</a></li>
+		
+			<li><a href="Cerealize/Codec/Marshal.html#M000011">#yours? &mdash; Cerealize::Codec::Marshal</a></li>
+		
+			<li><a href="Cerealize/Codec/Yaml.html#M000014">#yours? &mdash; Cerealize::Codec::Yaml</a></li>
+		
+	</ul>
+
+	<div id="validator-badges">
+		<p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+		<p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+			Rdoc Generator</a> 1.1.6</small>.</p>
+	</div>
+</body>
+</html>

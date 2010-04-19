@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+	<title>Module: Cerealize::ClassMethods</title>
+
+	<link rel="stylesheet" href="../rdoc.css" type="text/css" media="screen" />
+
+	<script src="../js/jquery.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../js/thickbox-compressed.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../js/quicksearch.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../js/darkfish.js" type="text/javascript"
+		charset="utf-8"></script>
+
+</head>
+<body class="module">
+
+	<div id="metadata">
+		<div id="home-metadata">
+			<div id="home-section" class="section">
+        <h3 class="section-header">
+          <a href="../index.html">Home</a>
+          <a href="../index.html#classes">Classes</a>
+          <a href="../index.html#methods">Methods</a>
+        </h3>
+			</div>
+		</div>
+
+		<div id="file-metadata">
+			<div id="file-list-section" class="section">
+				<h3 class="section-header">In Files</h3>
+				<div class="section-body">
+					<ul>
+					
+						<li><a href="../lib/cerealize_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+							class="thickbox" title="lib/cerealize.rb">lib/cerealize.rb</a></li>
+					
+					</ul>
+				</div>
+			</div>
+
+			
+		</div>
+
+		<div id="class-metadata">
+
+			<!-- Parent Class -->
+			
+
+			<!-- Namespace Contents -->
+			
+
+			<!-- Method Quickref -->
+			
+			<div id="method-list-section" class="section">
+				<h3 class="section-header">Methods</h3>
+				<ul class="link-list">
+					
+					<li><a href="#M000010">#cerealize</a></li>
+					
+					<li><a href="#M000009">#cerealize_option</a></li>
+					
+				</ul>
+			</div>
+			
+
+			<!-- Included Modules -->
+			
+		</div>
+
+		<div id="project-metadata">
+			
+			
+			<div id="fileindex-section" class="section project-section">
+				<h3 class="section-header">Files</h3>
+				<ul>
+				
+					<li class="file"><a href="../CHANGES.html">CHANGES</a></li>
+				
+					<li class="file"><a href="../LICENSE.html">LICENSE</a></li>
+				
+					<li class="file"><a href="../README.html">README</a></li>
+				
+					<li class="file"><a href="../TODO.html">TODO</a></li>
+				
+				</ul>
+			</div>
+			
+
+			<div id="classindex-section" class="section project-section">
+				<h3 class="section-header">Class Index
+					<span class="search-toggle"><img src="../images/find.png"
+						height="16" width="16" alt="[+]"
+						title="show/hide quicksearch" /></span></h3>
+				<form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+				<fieldset>
+					<legend>Quicksearch</legend>
+					<input type="text" name="quicksearch" value=""
+						class="quicksearch-field" />
+				</fieldset>
+				</form>
+
+				<ul class="link-list">
+				
+					<li><a href="../Cerealize.html">Cerealize</a></li>
+				
+					<li><a href="../Cerealize/ClassMethods.html">Cerealize::ClassMethods</a></li>
+				
+					<li><a href="../Cerealize/Codec.html">Cerealize::Codec</a></li>
+				
+					<li><a href="../Cerealize/Codec/Marshal.html">Cerealize::Codec::Marshal</a></li>
+				
+					<li><a href="../Cerealize/Codec/Yaml.html">Cerealize::Codec::Yaml</a></li>
+				
+					<li><a href="../Cerealize/InstanceMethods.html">Cerealize::InstanceMethods</a></li>
+				
+					<li><a href="../Cerealize/NoSuchCodec.html">Cerealize::NoSuchCodec</a></li>
+				
+					<li><a href="../Cerealize/NoSuitableCodec.html">Cerealize::NoSuitableCodec</a></li>
+				
+				</ul>
+				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
+			</div>
+
+			
+		</div>
+	</div>
+
+	<div id="documentation">
+		<h1 class="module">Cerealize::ClassMethods</h1>
+
+		<div id="description">
+			
+		</div>
+
+		<!-- Constants -->
+		
+
+		<!-- Attributes -->
+		
+
+		<!-- Methods -->
+		
+		<div id="public-instance-method-details" class="method-section section">
+			<h3 class="section-header">Public Instance Methods</h3>
+
+		
+			<div id="cerealize-method" class="method-detail ">
+				<a name="M000010"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">cerealize</span><span
+						class="method-args">(property, klass=nil, opt={})</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="cerealize-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/cerealize.rb, line 78</span>
+ 78:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">cerealize</span> <span class="ruby-identifier">property</span>, <span class="ruby-identifier">klass</span>=<span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">opt</span>={}
+ 79:       <span class="ruby-identifier">opt</span>[<span class="ruby-value">:encoding</span>] <span class="ruby-operator">||=</span> <span class="ruby-value">:marshal</span>
+ 80:       <span class="ruby-identifier">cerealize_option</span>[<span class="ruby-identifier">property</span>] =
+ 81:         <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-value">:class</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">klass</span>,
+ 82:                   <span class="ruby-value">:codec</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Cerealize</span>.<span class="ruby-identifier">codec_get</span>(<span class="ruby-identifier">opt</span>[<span class="ruby-value">:encoding</span>]))
+ 83: 
+ 84:       <span class="ruby-identifier">field_orig</span>  = <span class="ruby-node">&quot;#{property}_orig&quot;</span>
+ 85:       <span class="ruby-identifier">field_cache</span> = <span class="ruby-node">&quot;#{property}_cache&quot;</span>
+ 86: 
+ 87:       <span class="ruby-identifier">attr_accessor</span> <span class="ruby-identifier">field_orig</span>
+ 88:       <span class="ruby-identifier">private</span> <span class="ruby-identifier">field_orig</span>, <span class="ruby-node">&quot;#{field_orig}=&quot;</span>
+ 89: 
+ 90:       <span class="ruby-identifier">module_eval</span> <span class="ruby-value str">        def #{field_cache}          @#{property}        end        def #{field_cache}=(new_value)          @#{property} = new_value        end</span>
+ 91: 
+ 92:       <span class="ruby-comment cmt"># Invariants:</span>
+ 93:       <span class="ruby-comment cmt">#   - instance_variable_defined?(field_cache)  IFF the READER or WRITER has been called</span>
+ 94:       <span class="ruby-comment cmt">#   - instance_variable_defined?(field_pre)    IFF the READER was called BEFORE</span>
+ 95:       <span class="ruby-comment cmt">#                                              any WRITER</span>
+ 96: 
+ 97:       <span class="ruby-comment cmt"># READER method</span>
+ 98:       <span class="ruby-comment cmt">#</span>
+ 99:       <span class="ruby-identifier">module_eval</span> <span class="ruby-value str">        def #{property}          # See if no assignment yet          if !#{field_cache}            # Save property if not already saved            if !#{field_orig}              self.#{field_orig}= self[:#{property}]            end            # Set cached from pre            v = cerealize_decode(:#{property}, #{field_orig})            raise ActiveRecord::SerializationTypeMismatch, &quot;expected #{klass}, got \#{v.class}&quot; \\              if #{klass || 'nil'} &amp;&amp; !v.nil? &amp;&amp; !v.kind_of?(#{klass})            self.#{field_cache} = v          end          # Return cached          #{field_cache}        end</span>, <span class="ruby-keyword kw">__FILE__</span>, <span class="ruby-keyword kw">__LINE__</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+100: 
+101:       <span class="ruby-comment cmt"># WRITER method</span>
+102:       <span class="ruby-comment cmt">#</span>
+103:       <span class="ruby-identifier">module_eval</span> <span class="ruby-value str">        def #{property}=(v)          #{property}_will_change! if #{field_cache} != v          self.#{field_cache} = v        end</span>, <span class="ruby-keyword kw">__FILE__</span>, <span class="ruby-keyword kw">__LINE__</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+104: 
+105:       <span class="ruby-comment cmt"># Callback for before_save</span>
+106:       <span class="ruby-comment cmt">#</span>
+107:       <span class="ruby-identifier">module_eval</span> <span class="ruby-value str">        def #{property}_update_if_dirty          # See if we have a new cur value          if #{field_cache}            v = #{field_cache}            v_enc = cerealize_encode(:#{property}, v)            # See if no pre at all (i.e. it was written to before being read),            # or if different. When comparing, compare both marshalized string,            # and Object ==.            #            if !#{field_orig} ||              (v_enc != #{field_orig} &amp;&amp;                   v != cerealize_decode(:#{property}, #{field_orig}))              self[:#{property}] = v_enc            end          end          self.#{field_orig}  = nil          self.#{field_cache} = nil        end</span>, <span class="ruby-keyword kw">__FILE__</span>, <span class="ruby-keyword kw">__LINE__</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+108: 
+109:       <span class="ruby-identifier">before_save</span>(<span class="ruby-node">&quot;#{property}_update_if_dirty&quot;</span>)
+110:     <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="cerealize-option-method" class="method-detail ">
+				<a name="M000009"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">cerealize_option</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="cerealize-option-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/cerealize.rb, line 74</span>
+74:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">cerealize_option</span>
+75:       <span class="ruby-ivar">@cerealize_option</span> <span class="ruby-operator">||=</span> {}
+76:     <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+		</div>
+	
+
+	</div>
+
+
+	<div id="rdoc-debugging-section-dump" class="debugging-section">
+	
+		<p>Disabled; run with --debug to generate this.</p>
+	
+	</div>
+
+	<div id="validator-badges">
+		<p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+		<p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+			Rdoc Generator</a> 1.1.6</small>.</p>
+	</div>
+
+</body>
+</html>
+

@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+	<title>Module: Cerealize</title>
+
+	<link rel="stylesheet" href="./rdoc.css" type="text/css" media="screen" />
+
+	<script src="./js/jquery.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/thickbox-compressed.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/quicksearch.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/darkfish.js" type="text/javascript"
+		charset="utf-8"></script>
+
+</head>
+<body class="module">
+
+	<div id="metadata">
+		<div id="home-metadata">
+			<div id="home-section" class="section">
+        <h3 class="section-header">
+          <a href="./index.html">Home</a>
+          <a href="./index.html#classes">Classes</a>
+          <a href="./index.html#methods">Methods</a>
+        </h3>
+			</div>
+		</div>
+
+		<div id="file-metadata">
+			<div id="file-list-section" class="section">
+				<h3 class="section-header">In Files</h3>
+				<div class="section-body">
+					<ul>
+					
+						<li><a href="./lib/cerealize_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+							class="thickbox" title="lib/cerealize.rb">lib/cerealize.rb</a></li>
+					
+						<li><a href="./lib/cerealize/codec/marshal_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+							class="thickbox" title="lib/cerealize/codec/marshal.rb">lib/cerealize/codec/marshal.rb</a></li>
+					
+						<li><a href="./lib/cerealize/codec/yaml_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+							class="thickbox" title="lib/cerealize/codec/yaml.rb">lib/cerealize/codec/yaml.rb</a></li>
+					
+						<li><a href="./lib/cerealize/version_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+							class="thickbox" title="lib/cerealize/version.rb">lib/cerealize/version.rb</a></li>
+					
+					</ul>
+				</div>
+			</div>
+
+			
+		</div>
+
+		<div id="class-metadata">
+
+			<!-- Parent Class -->
+			
+
+			<!-- Namespace Contents -->
+			
+			<div id="namespace-list-section" class="section">
+				<h3 class="section-header">Namespace</h3>
+				<ul class="link-list">
+					
+					<li><span class="type">MODULE</span> <a href="Cerealize/ClassMethods.html">Cerealize::ClassMethods</a></li>
+					
+					<li><span class="type">MODULE</span> <a href="Cerealize/Codec.html">Cerealize::Codec</a></li>
+					
+					<li><span class="type">MODULE</span> <a href="Cerealize/InstanceMethods.html">Cerealize::InstanceMethods</a></li>
+					
+					<li><span class="type">CLASS</span> <a href="Cerealize/NoSuchCodec.html">Cerealize::NoSuchCodec</a></li>
+					
+					<li><span class="type">CLASS</span> <a href="Cerealize/NoSuitableCodec.html">Cerealize::NoSuitableCodec</a></li>
+					
+				</ul>
+			</div>
+			
+
+			<!-- Method Quickref -->
+			
+			<div id="method-list-section" class="section">
+				<h3 class="section-header">Methods</h3>
+				<ul class="link-list">
+					
+					<li><a href="#M000000">::included</a></li>
+					
+					<li><a href="#M000003">#codec_detect</a></li>
+					
+					<li><a href="#M000004">#codec_get</a></li>
+					
+					<li><a href="#M000002">#codec_names</a></li>
+					
+					<li><a href="#M000001">#codecs</a></li>
+					
+					<li><a href="#M000006">#decode</a></li>
+					
+					<li><a href="#M000005">#encode</a></li>
+					
+				</ul>
+			</div>
+			
+
+			<!-- Included Modules -->
+			
+		</div>
+
+		<div id="project-metadata">
+			
+			
+			<div id="fileindex-section" class="section project-section">
+				<h3 class="section-header">Files</h3>
+				<ul>
+				
+					<li class="file"><a href="./CHANGES.html">CHANGES</a></li>
+				
+					<li class="file"><a href="./LICENSE.html">LICENSE</a></li>
+				
+					<li class="file"><a href="./README.html">README</a></li>
+				
+					<li class="file"><a href="./TODO.html">TODO</a></li>
+				
+				</ul>
+			</div>
+			
+
+			<div id="classindex-section" class="section project-section">
+				<h3 class="section-header">Class Index
+					<span class="search-toggle"><img src="./images/find.png"
+						height="16" width="16" alt="[+]"
+						title="show/hide quicksearch" /></span></h3>
+				<form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+				<fieldset>
+					<legend>Quicksearch</legend>
+					<input type="text" name="quicksearch" value=""
+						class="quicksearch-field" />
+				</fieldset>
+				</form>
+
+				<ul class="link-list">
+				
+					<li><a href="./Cerealize.html">Cerealize</a></li>
+				
+					<li><a href="./Cerealize/ClassMethods.html">Cerealize::ClassMethods</a></li>
+				
+					<li><a href="./Cerealize/Codec.html">Cerealize::Codec</a></li>
+				
+					<li><a href="./Cerealize/Codec/Marshal.html">Cerealize::Codec::Marshal</a></li>
+				
+					<li><a href="./Cerealize/Codec/Yaml.html">Cerealize::Codec::Yaml</a></li>
+				
+					<li><a href="./Cerealize/InstanceMethods.html">Cerealize::InstanceMethods</a></li>
+				
+					<li><a href="./Cerealize/NoSuchCodec.html">Cerealize::NoSuchCodec</a></li>
+				
+					<li><a href="./Cerealize/NoSuitableCodec.html">Cerealize::NoSuitableCodec</a></li>
+				
+				</ul>
+				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
+			</div>
+
+			
+		</div>
+	</div>
+
+	<div id="documentation">
+		<h1 class="module">Cerealize</h1>
+
+		<div id="description">
+			
+		</div>
+
+		<!-- Constants -->
+		
+		<div id="constants-list" class="section">
+			<h3 class="section-header">Constants</h3>
+			<dl>
+			
+				<dt><a name="VERSION">VERSION</a></dt>
+				
+				<dd class="description"></dd>
+				
+			
+			</dl>
+		</div>
+		
+
+		<!-- Attributes -->
+		
+
+		<!-- Methods -->
+		
+		<div id="public-class-method-details" class="method-section section">
+			<h3 class="section-header">Public Class Methods</h3>
+
+		
+			<div id="included-method" class="method-detail ">
+				<a name="M000000"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">included</span><span
+						class="method-args">(base)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Dirty functionality: note that *_changed? and changed? work, but *_was,
+*_change, and changes do NOT work.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="included-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/cerealize.rb, line 19</span>
+19:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">included</span>(<span class="ruby-identifier">base</span>)
+20:     <span class="ruby-identifier">base</span>.<span class="ruby-identifier">send</span>( <span class="ruby-value">:extend</span>,    <span class="ruby-constant">ClassMethods</span>)
+21:     <span class="ruby-identifier">base</span>.<span class="ruby-identifier">send</span>(<span class="ruby-value">:include</span>, <span class="ruby-constant">InstanceMethods</span>)
+22:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+		</div>
+	
+		<div id="public-instance-method-details" class="method-section section">
+			<h3 class="section-header">Public Instance Methods</h3>
+
+		
+			<div id="codec-detect-method" class="method-detail ">
+				<a name="M000003"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">codec_detect</span><span
+						class="method-args">(str)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="codec-detect-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/cerealize.rb, line 35</span>
+35:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">codec_detect</span>(<span class="ruby-identifier">str</span>)
+36:     <span class="ruby-identifier">codecs</span>.<span class="ruby-identifier">find</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">codec</span><span class="ruby-operator">|</span> <span class="ruby-identifier">codec</span>.<span class="ruby-identifier">yours?</span>(<span class="ruby-identifier">str</span>) }
+37:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="codec-get-method" class="method-detail ">
+				<a name="M000004"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">codec_get</span><span
+						class="method-args">(codec_name)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="codec-get-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/cerealize.rb, line 39</span>
+39:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">codec_get</span>(<span class="ruby-identifier">codec_name</span>)
+40:     <span class="ruby-constant">Codec</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-identifier">codec_name</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">capitalize</span>)
+41:   <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">NameError</span>
+42:     <span class="ruby-identifier">raise</span> <span class="ruby-constant">NoSuchCodec</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">codec_name</span>)
+43:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="codec-names-method" class="method-detail ">
+				<a name="M000002"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">codec_names</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="codec-names-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/cerealize.rb, line 31</span>
+31:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">codec_names</span>
+32:     <span class="ruby-ivar">@codec_names</span> <span class="ruby-operator">||=</span> [<span class="ruby-value">:yaml</span>, <span class="ruby-value">:marshal</span>]
+33:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="codecs-method" class="method-detail ">
+				<a name="M000001"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">codecs</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="codecs-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/cerealize.rb, line 25</span>
+25:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">codecs</span>
+26:     <span class="ruby-ivar">@codecs</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">codec_names</span>.<span class="ruby-identifier">map</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">codec_name</span><span class="ruby-operator">|</span>
+27:                   <span class="ruby-identifier">codec_get</span>(<span class="ruby-identifier">codec_name</span>)
+28:                 }
+29:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="decode-method" class="method-detail ">
+				<a name="M000006"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">decode</span><span
+						class="method-args">(str, codec=nil)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="decode-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/cerealize.rb, line 50</span>
+50:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">decode</span>(<span class="ruby-identifier">str</span>, <span class="ruby-identifier">codec</span>=<span class="ruby-keyword kw">nil</span>)
+51:     <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">str</span>
+52:     <span class="ruby-identifier">codec</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">codec_detect</span>(<span class="ruby-identifier">str</span>)
+53: 
+54:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">codec</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">codec</span>.<span class="ruby-identifier">yours?</span>(<span class="ruby-identifier">str</span>)
+55:       <span class="ruby-identifier">codec</span>.<span class="ruby-identifier">decode</span>(<span class="ruby-identifier">str</span>)
+56:     <span class="ruby-keyword kw">else</span>
+57:       <span class="ruby-identifier">raise</span> <span class="ruby-constant">NoSuitableCodec</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;#{str[0..46]}...&quot;</span>)
+58:     <span class="ruby-keyword kw">end</span>
+59:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="encode-method" class="method-detail ">
+				<a name="M000005"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">encode</span><span
+						class="method-args">(obj, codec)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="encode-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/cerealize.rb, line 45</span>
+45:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">encode</span>(<span class="ruby-identifier">obj</span>, <span class="ruby-identifier">codec</span>)
+46:     <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">obj</span>
+47:     <span class="ruby-identifier">codec</span>.<span class="ruby-identifier">encode</span>(<span class="ruby-identifier">obj</span>)
+48:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+		</div>
+	
+
+	</div>
+
+
+	<div id="rdoc-debugging-section-dump" class="debugging-section">
+	
+		<p>Disabled; run with --debug to generate this.</p>
+	
+	</div>
+
+	<div id="validator-badges">
+		<p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+		<p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+			Rdoc Generator</a> 1.1.6</small>.</p>
+	</div>
+
+</body>
+</html>
+

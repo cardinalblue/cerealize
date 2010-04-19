@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+	<title>File: README [ cerealize-0.8.0 Documentation]</title>
+
+	<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet" />
+
+	<script src="./js/jquery.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/thickbox-compressed.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/quicksearch.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/darkfish.js" type="text/javascript"
+		charset="utf-8"></script>
+</head>
+
+<body class="file">
+	<div id="metadata">
+		<div id="home-metadata">
+			<div id="home-section" class="section">
+        <h3 class="section-header">
+          <a href="./index.html">Home</a>
+          <a href="./index.html#classes">Classes</a>
+          <a href="./index.html#methods">Methods</a>
+        </h3>
+			</div>
+		</div>
+
+		<div id="project-metadata">
+			
+			
+			<div id="fileindex-section" class="section project-section">
+				<h3 class="section-header">Files</h3>
+				<ul>
+				
+					<li class="file"><a href="./CHANGES.html">CHANGES</a></li>
+				
+					<li class="file"><a href="./LICENSE.html">LICENSE</a></li>
+				
+					<li class="file"><a href="./README.html">README</a></li>
+				
+					<li class="file"><a href="./TODO.html">TODO</a></li>
+				
+				</ul>
+			</div>
+			
+
+			<div id="classindex-section" class="section project-section">
+				<h3 class="section-header">Class Index
+					<span class="search-toggle"><img src="./images/find.png"
+						height="16" width="16" alt="[+]"
+						title="show/hide quicksearch" /></span></h3>
+				<form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+				<fieldset>
+					<legend>Quicksearch</legend>
+					<input type="text" name="quicksearch" value=""
+						class="quicksearch-field" />
+				</fieldset>
+				</form>
+
+				<ul class="link-list">
+				
+					<li><a href="./Cerealize.html">Cerealize</a></li>
+				
+					<li><a href="./Cerealize/ClassMethods.html">Cerealize::ClassMethods</a></li>
+				
+					<li><a href="./Cerealize/Codec.html">Cerealize::Codec</a></li>
+				
+					<li><a href="./Cerealize/Codec/Marshal.html">Cerealize::Codec::Marshal</a></li>
+				
+					<li><a href="./Cerealize/Codec/Yaml.html">Cerealize::Codec::Yaml</a></li>
+				
+					<li><a href="./Cerealize/InstanceMethods.html">Cerealize::InstanceMethods</a></li>
+				
+					<li><a href="./Cerealize/NoSuchCodec.html">Cerealize::NoSuchCodec</a></li>
+				
+					<li><a href="./Cerealize/NoSuitableCodec.html">Cerealize::NoSuitableCodec</a></li>
+				
+				</ul>
+				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
+			</div>
+
+			
+		</div>
+	</div>
+
+	<div id="documentation">
+		<h1>cerealize 0.8.0</h1>
+<p>
+by Cardinal Blue ( <a href="http://cardinalblue.com">cardinalblue.com</a> )
+</p>
+<h2>LINKS:</h2>
+<ul>
+<li><p>
+<a href="http://github.com/cardinalblue/cerealize">github</a>
+</p>
+</li>
+<li><p>
+<a href="http://rubygems.org/gems/cerealize">rubygems</a>
+</p>
+</li>
+</ul>
+<h2>DESCRIPTION:</h2>
+<pre>
+ Serialize out of the Cerealize Box
+ * a drop-in replacement for ActiveRecord's serialize
+
+ It can auto transcode old encoding (yaml if you're using AR's serialize),
+ to new encoding (marshal, json, you name it) without any migration.
+
+ Current supported encoding:
+ 1. YAML
+ 2. Marshal
+ 3. JSON (planned)
+
+ Current supported ORM:
+ 1. ActiveRecord (tested with 2.3.5)
+ 2. DataMapper (planned)
+</pre>
+<h2>SYNOPSIS:</h2>
+<pre>
+ require 'cerealize'
+ class User &lt; ActiveRecord::Base
+   # when force_encoding set to false (this is default), cerealize is
+   # smart enough to transcode old encoding (e.g. yaml) to new encoding
+   # (i.e. marshal)
+   cerealize :data, Hash, :encoding =&gt; :marshal, :force_encoding =&gt; false
+ end
+</pre>
+<h2>REQUIREMENTS:</h2>
+<ul>
+<li><p>
+tested with MRI 1.8.7 and 1.9.1
+</p>
+</li>
+<li><p>
+one of your desired ORM
+</p>
+</li>
+</ul>
+<h2>INSTALL:</h2>
+<p>
+> gem install cerealize # or if you want rails plugin and bleeding edge >
+script/plugin install git://github.com/cardinalblue/cerealize.git
+</p>
+<h2>LICENSE:</h2>
+<pre>
+  Apache License 2.0
+
+  Copyright (c) 2010, Cardinal Blue
+
+  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.</pre>
+
+	</div>
+
+	<div id="validator-badges">
+		<p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+		<p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+			Rdoc Generator</a> 1.1.6</small>.</p>
+	</div>
+</body>
+</html>
+
