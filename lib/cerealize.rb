@@ -22,15 +22,13 @@ module Cerealize
 
   module_function
   def codecs
-    @codecs ||= Codec.constants.sort.map{ |codec_name|
-                  Codec.const_get(codec_name)
+    @codecs ||= codec_names.map{ |codec_name|
+                  codec_get(codec_name)
                 }
   end
 
   def codec_names
-    @codec_names ||= codecs.map{ |codec|
-                       codec.to_s.sub(/(\w+::)+/, '').downcase.to_sym
-                     }
+    @codec_names ||= [:yaml, :marshal]
   end
 
   def codec_detect(str)
