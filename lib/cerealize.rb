@@ -125,9 +125,9 @@ module Cerealize
       # WRITER method
       #
       module_eval <<-RUBY, __FILE__, __LINE__ + 1
-        def #{property}=(v)
-          #{property}_will_change! if #{field_cache} != v
-          self.#{field_cache} = v
+        def #{property}=(value)
+          #{property}_will_change! if #{field_cache} != value
+          self.#{field_cache} = value
         end
       RUBY
 
@@ -137,19 +137,20 @@ module Cerealize
         def #{property}_update_if_dirty
           # See if we have a new cur value
           if #{field_cache}
-            v = #{field_cache}
-            v_enc = cerealize_encode(:#{property}, v)
+            value     = #{field_cache}
+            value_enc = cerealize_encode(:#{property}, value)
 
-            # See if no pre at all (i.e. it was written to before being read),
-            # or if different. When comparing, compare both marshalized string,
-            # and Object ==.
+            # See if no orig at all (i.e. it was written to before
+            # being read), or if different. When comparing, compare
+            # both marshalized string, and Object ==.
             #
             if !#{field_orig} ||
-              (v_enc != #{field_orig} &&
-                   v != cerealize_decode(:#{property}, #{field_orig}))
-              self[:#{property}] = v_enc
+              (value_enc != #{field_orig} &&
+               value     != cerealize_decode(:#{property}, #{field_orig}))
+              self[:#{property}] = value_enc
             end
           end
+
           self.#{field_orig}  = nil
           self.#{field_cache} = nil
         end
