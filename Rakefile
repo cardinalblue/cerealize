@@ -17,6 +17,7 @@ Bones{
 
   depend_on 'activerecord',                       :version => '>=2.3.5'
   # depend_on 'activerecord', :development => true, :version => '>=2.3.5'
+  depend_on 'sqlite3-ruby', :development => true
 
   name    proj
   url     "http://github.com/cardinalblue/#{proj}"
