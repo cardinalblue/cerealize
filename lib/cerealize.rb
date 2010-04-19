@@ -82,10 +82,18 @@ module Cerealize
                   :codec => Cerealize.codec_get(opt[:encoding]))
 
       field_orig  = "#{property}_pre"
-      field_cache = "@#{property}"
+      field_cache = "#{property}_cache"
 
       attr_accessor field_orig
       private field_orig, "#{field_orig}="
+
+      define_method field_cache do
+        instance_variable_get("@#{property}")
+      end
+
+      define_method "#{field_cache}=" do |v|
+        instance_variable_set("@#{property}", v)
+      end
 
       # Invariants:
       #   - instance_variable_defined?(field_cache)  IFF the READER or WRITER has been called
@@ -98,7 +106,7 @@ module Cerealize
         # Rails.logger.debug "#{property} (READER)"
 
         # See if no assignment yet
-        if !instance_variable_defined?(field_cache)
+        if !send(field_cache)
 
           # Save property if not already saved
           if !send(field_orig)
@@ -109,19 +117,19 @@ module Cerealize
           v = cerealize_decode(property, send(field_orig))
           raise ActiveRecord::SerializationTypeMismatch, "expected #{klass}, got #{v.class}" \
             if klass && !v.nil? && !v.kind_of?(klass)
-          instance_variable_set(field_cache, v)
+          send("#{field_cache}=", v)
         end
 
         # Return cached
-        instance_variable_get(field_cache)
+        send(field_cache)
       end
 
       # WRITER method
       #
       define_method "#{property}=" do |v|
         # Rails.logger.debug "#{property}=#{v}"
-        send "#{property}_will_change!" if instance_variable_get(field_cache) != v
-        instance_variable_set(field_cache, v)
+        send "#{property}_will_change!" if send(field_cache) != v
+        send("#{field_cache}=", v)
       end
 
       # Callback for before_save
@@ -130,8 +138,8 @@ module Cerealize
         # Rails.logger.debug "#{property}_update_if_dirty"
 
         # See if we have a new cur value
-        if instance_variable_defined?(field_cache)
-          v = instance_variable_get(field_cache)
+        if send(field_cache)
+          v = send(field_cache)
           v_enc = cerealize_encode(property, v)
 
           # See if no pre at all (i.e. it was written to before being read),
@@ -141,11 +149,11 @@ module Cerealize
           if !send(field_orig) ||
             (v_enc != send(field_orig) &&
                  v != cerealize_decode(property, send(field_orig)))
-            write_attribute(property, v_enc)
+            self[property] = v_enc
           end
         end
-        send("#{field_orig}=", nil)
-        remove_instance_variable(field_cache) if instance_variable_defined?(field_cache)
+        send("#{field_orig}=",  nil)
+        send("#{field_cache}=", nil)
       end
       before_save("#{property}_update_if_dirty")
     end
