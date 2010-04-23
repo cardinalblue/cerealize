@@ -39,5 +39,5 @@ task :default do
 end
 
 task 'doc:rdoc' do
-  sh 'cp -r ~/.gem/ruby/1.9.1/gems/rdoc-2.5.3/lib/rdoc/generator/template/darkfish/* doc/'
+  sh 'cp -r ~/.gem/ruby/1.9.1/gems/rdoc-2.5.6/lib/rdoc/generator/template/darkfish/* doc/'
 end
