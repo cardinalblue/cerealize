@@ -67,6 +67,10 @@ Darwin godfat.local 10.3.0 Darwin Kernel Version 10.3.0: Fri Feb 26 11:58:09 PST
 > ruby -v
 ruby 1.9.1p378 (2010-01-10 revision 26273) [i386-darwin10]
 
+
+
+
+
 > ruby -I lib bench/simple.rb
 Rehearsal ---------------------------------------------------------------------
 serialize (build in ActiveRecord)   4.050000   0.080000   4.130000 (  4.459223)
@@ -76,6 +80,10 @@ cerealize                           0.810000   0.010000   0.820000 (  1.119697)
                                         user     system      total        real
 serialize (build in ActiveRecord)   3.870000   0.070000   3.940000 (  4.299835)
 cerealize                           0.690000   0.010000   0.700000 (  0.733006)
+
+
+
+
 
 http://chart.apis.google.com/chart?cht=bvg&chs=350x250&chd=t:85.9967,14.66012&chxl=0:|serialize|cerealize&chxt=x,y&chbh=150&chxr=1,0,5
 
