@@ -85,14 +85,15 @@ cerealize                           0.690000   0.010000   0.700000 (  0.733006)
 
 
 
-http://chart.apis.google.com/chart?cht=bvg&chs=350x250&chd=t:85.9967,14.66012&chxl=0:|serialize|cerealize&chxt=x,y&chbh=150&chxr=1,0,5
+http://chart.apis.google.com/chart?cht=bvg&chs=350x650&chd=t:85.9967,14.66012&chxl=0:|serialize|cerealize&chxt=x,y&chbh=150&chxr=1,0,5&chma=25
 
 http://code.google.com/apis/chart/docs/chart_playground.html
 
 cht=bvg
-chs=350x250
+chs=350x650
 chd=t:85.9967,14.66012
 chxl=0:|serialize|cerealize
 chxt=x,y
 chbh=150
 chxr=1,0,5
+chma=25
