@@ -21,7 +21,7 @@ Bones{
 
   name    proj
   url     "http://github.com/cardinalblue/#{proj}"
-  authors 'Cardinal Blue'
+  authors ['Cardinal Blue', 'Lin Jen-Shin (aka godfat 真常)', 'Jaime Cham']
   email   'dev (XD) cardinalblue.com'
 
   history_file   'CHANGES'
@@ -36,8 +36,4 @@ CLEAN.include Dir['**/*.rbc']
 task :default do
   Rake.application.options.show_task_pattern = /./
   Rake.application.display_tasks_and_comments
-end
-
-task 'doc:rdoc' do
-  sh 'cp -r ~/.gem/ruby/1.9.1/gems/rdoc-2.5.6/lib/rdoc/generator/template/darkfish/* doc/'
 end
