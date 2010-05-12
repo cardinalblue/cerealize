@@ -28,6 +28,7 @@ by Cardinal Blue ( http://cardinalblue.com )
 
  require 'cerealize'
  class User < ActiveRecord::Base
+   include Cerealize
    # when force_encoding set to false (this is default), cerealize is
    # smart enough to transcode old encoding (e.g. yaml) to new encoding
    # (i.e. marshal)
