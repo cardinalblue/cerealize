@@ -1,5 +1,27 @@
 = cerealize changes history
 
+== cerealize 0.8.2 -- ?
+* Added attr_hash feature, create virtual properties inside a hash.
+  An example:
+
+    require 'cerealize'
+    require 'cerealize/attr_hash'
+
+    class Apple < ActiveRecord::Base
+      include Cerealize
+      include Cerealize::AttrHash
+      cerealize :data
+      attr_hash :data, :name, :size
+    end
+
+    apple = Apple.new
+    apple.name = 'windoze'
+
+    # which is equivalent to:
+
+    apple.data ||= {}
+    apple.data[:name] = 'windoze'
+
 == cerealize 0.8.1 -- 2010-07-16
 * module_eval is a lot faster than define_method with a block,
   I think it's all about closure.
