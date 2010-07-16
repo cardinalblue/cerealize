@@ -4,6 +4,8 @@ require 'active_record'
 autoload :YAML, 'yaml'
 
 module Cerealize
+  InternalName = 'CerealizeMethods'
+
   module Codec
     autoload 'Yaml',    'cerealize/codec/yaml'
     autoload 'Marshal', 'cerealize/codec/marshal'
@@ -93,10 +95,10 @@ module Cerealize
       attr_accessor field_orig
       private field_orig, "#{field_orig}="
 
-      mod = if const_defined?('CerealizeMethods')
-              const_get('CerealizeMethods')
+      mod = if const_defined?(Cerealize::InternalName)
+              const_get(Cerealize::InternalName)
             else
-              const_set('CerealizeMethods', Module.new)
+              const_set(Cerealize::InternalName, Module.new)
             end
 
       mod.module_eval <<-RUBY, __FILE__, __LINE__ + 1
