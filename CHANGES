@@ -1,8 +1,23 @@
 = cerealize changes history
 
-== cerealize 0.8.1 -- ?
+== cerealize 0.8.1 -- 2010-07-16
 * module_eval is a lot faster than define_method with a block,
-  i think it's all about closure
+  I think it's all about closure.
+
+* Now we're creating cerealize methods inside a saperate,
+  this makes it easier to override things, thus doing extension.
+  An example:
+
+    class Dog < ActiveRecord::Base
+      include Cerealize
+
+      cerealize :mood, String
+      def mood
+        "mood: #{super}"
+      end
+    end
+
+  Previously, this would break things. (Please avoid alias_method_chain.)
 
 == cerealize 0.8.0 -- 2010-04-18
 * release early, release often
