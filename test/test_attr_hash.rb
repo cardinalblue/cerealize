@@ -10,15 +10,15 @@ require 'test/helper_active_record'
 require 'test/unit'
 
 ActiveRecord::Base.connection.create_table :apples, :force => true do |t|
-  t.text :attr_hash
+  t.text :data
 end
 
 class AttrHashTest < Test::Unit::TestCase
   class Apple < ActiveRecord::Base
     include Cerealize
     include Cerealize::AttrHash
-    cerealize :attr_hash
-    attr_hash :attr_hash, :name, :size
+    cerealize :data
+    attr_hash :data, :name, :size
   end
 
   def test_simple
@@ -35,12 +35,12 @@ class AttrHashTest < Test::Unit::TestCase
 
   def test_nil
     assert_nil Apple.new.name
-    assert_nil Apple.new.attr_hash
+    assert_nil Apple.new.data
   end
 
   def simple_case hh, ah
     assert_equal hh[:name], ah.name
     assert_equal hh[:size], ah.size
-    assert_equal hh       , ah.attr_hash
+    assert_equal hh       , ah.data
   end
 end
