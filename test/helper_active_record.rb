@@ -32,3 +32,18 @@ ActiveRecord::Base.connection.create_table :cats, :force => true do |t|
   t.text :tail
   t.text :food
 end
+
+
+
+class Dog < ActiveRecord::Base
+  include Cerealize
+
+  cerealize :mood, String
+  def mood
+    "mood: #{super}"
+  end
+end
+
+ActiveRecord::Base.connection.create_table :dogs, :force => true do |t|
+  t.text :mood
+end

@@ -93,7 +93,13 @@ module Cerealize
       attr_accessor field_orig
       private field_orig, "#{field_orig}="
 
-      module_eval <<-RUBY
+      mod = if const_defined?('CerealizeMethods')
+              const_get('CerealizeMethods')
+            else
+              const_set('CerealizeMethods', Module.new)
+            end
+
+      mod.module_eval <<-RUBY, __FILE__, __LINE__ + 1
         def #{field_cache}
           @#{property}
         end
@@ -110,7 +116,7 @@ module Cerealize
 
       # READER method
       #
-      module_eval <<-RUBY, __FILE__, __LINE__ + 1
+      mod.module_eval <<-RUBY, __FILE__, __LINE__ + 1
         def #{property}
           # Return cached
           return #{field_cache} if #{field_cache}
@@ -130,7 +136,7 @@ module Cerealize
 
       # WRITER method
       #
-      module_eval <<-RUBY, __FILE__, __LINE__ + 1
+      mod.module_eval <<-RUBY, __FILE__, __LINE__ + 1
         def #{property}=(value)
           #{property}_will_change! if #{field_cache} != value
           self.#{field_cache} = value
@@ -139,7 +145,7 @@ module Cerealize
 
       # Callback for before_save
       #
-      module_eval <<-RUBY, __FILE__, __LINE__ + 1
+      mod.module_eval <<-RUBY, __FILE__, __LINE__ + 1
         def #{property}_update_if_dirty
           # See if we have a new cur value
           if #{field_cache}
@@ -162,6 +168,7 @@ module Cerealize
         end
       RUBY
 
+      include mod unless self < mod
       before_save("#{property}_update_if_dirty")
     end
   end

@@ -17,6 +17,24 @@ class BasicTest < Test::Unit::TestCase
   def teardown
   end
 
+  def test_no_conflict
+    assert ! Cat.respond_to?(:captain)
+    assert !Boat.respond_to?(:food)
+  end
+
+  def test_cerealize_module
+    assert    Cat <  Cat::CerealizeMethods
+    assert   Boat < Boat::CerealizeMethods
+
+    assert !( Cat < Boat::CerealizeMethods)
+    assert !(Boat <  Cat::CerealizeMethods)
+  end
+
+  def test_super_calling
+    assert_equal 'mood: ',         Dog.new.mood
+    assert_equal 'mood: cheerful', Dog.new(:mood => 'cheerful').mood
+  end
+
   def test_encoding_yaml
     set_encoding(:yaml)
     Boat.create :name => 'yamato', :captain => Person.new('kosaku')
