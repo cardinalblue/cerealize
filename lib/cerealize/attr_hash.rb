@@ -1,7 +1,7 @@
 
 module Cerealize
   module ClassMethods
-    def attr_hash property, *attrs
+    def attr_hash property, attrs
       ruby = attrs.inject([]){ |codes, attr|
         codes << <<-RUBY
           def #{attr}

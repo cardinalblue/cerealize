@@ -55,7 +55,7 @@ end
 class Apple < ActiveRecord::Base
   include Cerealize
   cerealize :data
-  attr_hash :data, :name, :size
+  attr_hash :data, [:name, :size]
 end
 
 ActiveRecord::Base.connection.create_table :apples, :force => true do |t|
