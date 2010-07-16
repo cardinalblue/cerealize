@@ -5,6 +5,8 @@ ActiveRecord::Base.establish_connection(
   :database => ':memory:'
 )
 
+# ===================================================================
+
 class Boat < ActiveRecord::Base
   include Cerealize
   cerealize :captain
@@ -18,7 +20,7 @@ ActiveRecord::Base.connection.create_table :boats, :force => true do |t|
   t.string  :cargo
 end
 
-
+# ===================================================================
 
 class Cat < ActiveRecord::Base
   include Cerealize
@@ -33,7 +35,7 @@ ActiveRecord::Base.connection.create_table :cats, :force => true do |t|
   t.text :food
 end
 
-
+# ===================================================================
 
 class Dog < ActiveRecord::Base
   include Cerealize
@@ -46,4 +48,17 @@ end
 
 ActiveRecord::Base.connection.create_table :dogs, :force => true do |t|
   t.text :mood
+end
+
+# ===================================================================
+
+class Apple < ActiveRecord::Base
+  include Cerealize
+  include Cerealize::AttrHash
+  cerealize :data
+  attr_hash :data, :name, :size
+end
+
+ActiveRecord::Base.connection.create_table :apples, :force => true do |t|
+  t.text :data
 end

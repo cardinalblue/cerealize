@@ -1,26 +1,13 @@
 
-require 'rubygems' if RUBY_VERSION < '1.9.1'
-require 'cerealize'
-require 'cerealize/attr_hash'
-
-require 'test/stub'
-require 'test/helper'
-require 'test/helper_active_record'
-
-require 'test/unit'
-
-ActiveRecord::Base.connection.create_table :apples, :force => true do |t|
-  t.text :data
+unless respond_to?(:require_relative, true)
+  def require_relative path
+    require "#{File.dirname(__FILE__)}/#{path}"
+  end
 end
 
-class AttrHashTest < Test::Unit::TestCase
-  class Apple < ActiveRecord::Base
-    include Cerealize
-    include Cerealize::AttrHash
-    cerealize :data
-    attr_hash :data, :name, :size
-  end
+require_relative 'common'
 
+class AttrHashTest < Test::Unit::TestCase
   def test_simple
     hh = {:name => 'wane', :size => 123456}
     ah = Apple.new(hh)

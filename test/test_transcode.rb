@@ -1,13 +1,12 @@
 # encoding: utf-8
 
-require 'rubygems' if RUBY_VERSION < '1.9.1'
-require 'cerealize'
+unless respond_to?(:require_relative, true)
+  def require_relative path
+    require "#{File.dirname(__FILE__)}/#{path}"
+  end
+end
 
-require 'test/stub'
-require 'test/helper'
-require 'test/helper_active_record'
-
-require 'test/unit'
+require_relative 'common'
 
 class TranscodeTest < Test::Unit::TestCase
   def setup
