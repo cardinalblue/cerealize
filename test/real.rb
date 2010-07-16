@@ -54,7 +54,6 @@ end
 
 class Apple < ActiveRecord::Base
   include Cerealize
-  include Cerealize::AttrHash
   cerealize :data
   attr_hash :data, :name, :size
 end

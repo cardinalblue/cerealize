@@ -1,5 +1,7 @@
 # encoding: utf-8
 
+require 'cerealize/attr_hash'
+
 require 'active_record'
 autoload :YAML, 'yaml'
 

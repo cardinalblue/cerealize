@@ -2,7 +2,6 @@
 
 require 'rubygems' if RUBY_VERSION < '1.9.1'
 require 'cerealize'
-require 'cerealize/attr_hash'
 
 require_relative 'stub'
 require_relative 'real'
