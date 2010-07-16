@@ -33,6 +33,18 @@ by Cardinal Blue ( http://cardinalblue.com )
    # smart enough to transcode old encoding (e.g. yaml) to new encoding
    # (i.e. marshal)
    cerealize :data, Hash, :encoding => :marshal, :force_encoding => false
+
+   # and this could create accessors for values store in the hash
+   attr_hash :data, [:name, :mail]
+
+   # which makes below two equivalent:
+
+   # user.name = 'ham'
+
+   # which is equivalent to:
+
+   # user.data ||= {}
+   # user.data[:name] = 'ham'
  end
 
 == REQUIREMENTS:

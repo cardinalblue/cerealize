@@ -6,19 +6,19 @@
 
     require 'cerealize'
 
-    class Apple < ActiveRecord::Base
+    class User < ActiveRecord::Base
       include Cerealize
       cerealize :data
-      attr_hash :data, :name, :size
+      attr_hash :data, [:name, :mail]
     end
 
-    apple = Apple.new
-    apple.name = 'windoze'
+    user = User.new
+    user.name = 'ham'
 
     # which is equivalent to:
 
-    apple.data ||= {}
-    apple.data[:name] = 'windoze'
+    user.data ||= {}
+    user.data[:name] = 'ham'
 
 == cerealize 0.8.1 -- 2010-07-16
 * module_eval is a lot faster than define_method with a block,
