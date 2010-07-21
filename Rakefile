@@ -25,10 +25,10 @@ Bones{
   email   'dev (XD) cardinalblue.com'
 
   history_file   'CHANGES'
-   readme_file   'README.rdoc'
+   readme_file   'README'
    ignore_file   '.gitignore'
   rdoc.include   ['\w+']
-  rdoc.exclude   ['test', 'doc', 'Rakefile']
+  rdoc.exclude   ['test', 'doc', 'Rakefile', 'slide']
 }
 
 CLEAN.include Dir['**/*.rbc']
