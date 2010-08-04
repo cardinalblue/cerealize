@@ -1,6 +1,6 @@
 = cerealize changes history
 
-== cerealize 0.8.2 -- ?
+== cerealize 0.8.2 -- 2010-08-04
 * Added attr_hash feature, create virtual properties inside a hash.
   An example:
 
