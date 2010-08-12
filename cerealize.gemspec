@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cerealize}
-  s.version = "0.8.1"
+  s.version = "0.8.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Cardinal Blue", "Lin Jen-Shin (aka godfat 真常)", "Jaime Cham"]
-  s.date = %q{2010-08-04}
+  s.date = %q{2010-08-12}
   s.description = %q{ Serialize out of the Cerealize Box
  - a drop-in replacement for ActiveRecord's serialize
 
