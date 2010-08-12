@@ -1,5 +1,10 @@
 = cerealize changes history
 
+== cerealize 0.8.3 -- 2010-08-12
+
+* Use class_inheritable_accessor from active_support on cerealize_option to
+  fix issues from inheritance.
+
 == cerealize 0.8.2 -- 2010-08-04
 * Added attr_hash feature, create virtual properties inside a hash.
   An example:

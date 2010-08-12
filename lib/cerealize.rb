@@ -23,6 +23,8 @@ module Cerealize
   def self.included(base)
     base.send( :extend,    ClassMethods)
     base.send(:include, InstanceMethods)
+    base.class_inheritable_accessor :cerealize_option
+    base.cerealize_option = {}
   end
 
   module_function
@@ -75,10 +77,6 @@ module Cerealize
   end
 
   module ClassMethods
-    def cerealize_option
-      @cerealize_option ||= {}
-    end
-
     def cerealize_update_codec_cache
       cerealize_option.each{ |(property, opt)|
         opt.merge!(:codec => Cerealize.codec_get(opt[:encoding]))
