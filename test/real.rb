@@ -46,8 +46,12 @@ class Dog < ActiveRecord::Base
   end
 end
 
+class BigDog < Dog
+  cerealize :hook, Integer
+end
+
 ActiveRecord::Base.connection.create_table :dogs, :force => true do |t|
-  t.text :mood
+  t.text :mood, :hook
 end
 
 # ===================================================================

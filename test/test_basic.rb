@@ -65,4 +65,15 @@ class BasicTest < Test::Unit::TestCase
                  Cat.cerealize_option)
   end
 
+  def test_inheritance
+    mood = {:mood => {:class    => String,
+                      :encoding => :marshal,
+                      :codec    => Cerealize::Codec::Marshal}}
+    hook = {:hook => {:class    => Integer,
+                      :encoding => :marshal,
+                      :codec    => Cerealize::Codec::Marshal}}
+    assert_equal(mood            ,    Dog.cerealize_option)
+    assert_equal(mood.merge(hook), BigDog.cerealize_option)
+  end
+
 end
