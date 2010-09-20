@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Cardinal Blue", "Lin Jen-Shin (aka godfat 真常)", "Jaime Cham"]
-  s.date = %q{2010-08-12}
+  s.date = %q{2010-09-20}
   s.description = %q{ Serialize out of the Cerealize Box
  - a drop-in replacement for ActiveRecord's serialize
 
@@ -37,16 +37,16 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<activerecord>, [">= 2.3.5"])
+      s.add_runtime_dependency(%q<activerecord>, ["< 3"])
       s.add_development_dependency(%q<sqlite3-ruby>, [">= 1.3.1"])
       s.add_development_dependency(%q<bones>, [">= 3.4.7"])
     else
-      s.add_dependency(%q<activerecord>, [">= 2.3.5"])
+      s.add_dependency(%q<activerecord>, ["< 3"])
       s.add_dependency(%q<sqlite3-ruby>, [">= 1.3.1"])
       s.add_dependency(%q<bones>, [">= 3.4.7"])
     end
   else
-    s.add_dependency(%q<activerecord>, [">= 2.3.5"])
+    s.add_dependency(%q<activerecord>, ["< 3"])
     s.add_dependency(%q<sqlite3-ruby>, [">= 1.3.1"])
     s.add_dependency(%q<bones>, [">= 3.4.7"])
   end
