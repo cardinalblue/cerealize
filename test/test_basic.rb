@@ -34,6 +34,25 @@ class BasicTest < Test::Unit::TestCase
     assert_equal 'mood: cheerful', Dog.new(:mood => 'cheerful').mood
   end
 
+  def test_setting_nil_in_hash
+    apple = Apple.create(:data => {:name => 'pine'})
+    assert_equal({:name => 'pine'}, apple.data)
+    assert_equal 'pine', apple.name
+    apple.data[:name] = nil
+    assert_equal nil, apple.name
+    apple.save; apple.reload
+    assert_equal nil, apple.name
+    assert_equal({:name => nil}, apple.data)
+  end
+
+  def test_save_nil
+    apple = Apple.find(Apple.create(:data => [5]).id)
+    assert_equal [5], apple.data
+    apple.update_attributes(:data => nil)
+    assert_equal nil, apple.data
+    assert_equal nil, Apple.find(apple.id).data
+  end
+
   def test_encoding_yaml
     set_encoding(:yaml)
     Boat.create :name => 'yamato', :captain => Person.new('kosaku')

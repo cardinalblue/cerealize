@@ -151,7 +151,7 @@ module Cerealize
       mod.module_eval <<-RUBY, __FILE__, __LINE__ + 1
         def #{property}_update_if_dirty
           # See if we have a new cur value
-          if #{field_cache}
+          if instance_variable_defined?('@#{property}')
             value     = #{field_cache}
             value_enc = cerealize_encode(:#{property}, value)
 
@@ -164,10 +164,11 @@ module Cerealize
                value     != cerealize_decode(:#{property}, #{field_orig}))
               self[:#{property}] = value_enc
             end
+
+            remove_instance_variable('@#{property}')
           end
 
-          self.#{field_orig}  = nil
-          self.#{field_cache} = nil
+          self.#{field_orig} = nil
         end
       RUBY
 
