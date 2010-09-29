@@ -1,5 +1,10 @@
 = cerealize changes history
 
+== cerealize 0.8.4 -- 2010-09-29
+
+* Fixed activerecord dependency, should be <3
+* Fixed a quirk in activerecord-2.3.9 for associations and STI for attr_hash
+
 == cerealize 0.8.3 -- 2010-08-12
 
 * Use class_inheritable_accessor from active_support on cerealize_option to

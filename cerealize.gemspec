@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Cardinal Blue", "Lin Jen-Shin (aka godfat 真常)", "Jaime Cham"]
-  s.date = %q{2010-09-20}
+  s.date = %q{2010-09-29}
   s.description = %q{ Serialize out of the Cerealize Box
  - a drop-in replacement for ActiveRecord's serialize
 
