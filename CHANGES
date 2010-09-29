@@ -1,5 +1,14 @@
 = cerealize changes history
 
+== cerealize 0.8.5 -- 2010-09-29
+
+* Fix a bug that nil can't be set in cerealized column.
+  This shows the bug:
+
+    apple = Apple.find(Apple.create(:data => [5]).id)
+    apple.update_attributes(:data => nil)
+    assert_equal nil, apple.data # => shouldn't be [5]
+
 == cerealize 0.8.4 -- 2010-09-29
 
 * Fixed activerecord dependency, should be <3
