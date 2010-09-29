@@ -1,8 +1,12 @@
 = cerealize changes history
 
+== cerealize 0.8.6 -- 2010-09-29
+
+* Make sure attr_hash didn't get saved setting the same value.
+
 == cerealize 0.8.5 -- 2010-09-29
 
-* Fix a bug that nil can't be set in cerealized column.
+* Fixed a bug that nil can't be set in cerealized column.
   This shows the bug:
 
     apple = Apple.find(Apple.create(:data => [5]).id)

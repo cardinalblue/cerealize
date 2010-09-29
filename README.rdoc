@@ -1,4 +1,4 @@
-= cerealize 0.8.3
+= cerealize 0.8.6
 by Cardinal Blue ( http://cardinalblue.com )
 
 == LINKS:
