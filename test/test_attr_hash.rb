@@ -25,6 +25,21 @@ class AttrHashTest < Test::Unit::TestCase
     assert_nil Apple.new.data
   end
 
+  def test_dont_save_twice
+    apple = Apple.create(:name => 'banana')
+    assert apple.updated_at
+
+    Apple.record_timestamps = false
+    apple.update_attributes(:updated_at => nil)
+    Apple.record_timestamps = true
+    apple2 = Apple.find(apple.id)
+    assert_equal nil, apple2.updated_at
+    apple2.update_attributes :name => 'banana'
+    assert_equal nil, apple2.updated_at
+    apple2.update_attributes :name => 'pineapple'
+    assert apple2.updated_at
+  end
+
   def simple_case hh, ah
     assert_equal hh[:name], ah.name
     assert_equal hh[:size], ah.size

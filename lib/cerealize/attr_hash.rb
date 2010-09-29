@@ -13,13 +13,16 @@ module Cerealize
           end
 
           def #{attr}= value
+            self.#{property} ||= {}
+
             # this line fixes the quirks in ActiveRecord 2.3.9 at
             # activerecord-2.3.9/lib/active_record/associations/association_collection.rb:L352-L363
             # when we're using associations and STI, thanks Jaime
             # TODO: test for this?
-            #{property}_will_change! if respond_to? :#{property}_will_change!
+            #{property}_will_change! if
+              respond_to?(:#{property}_will_change!) &&
+              #{property}[:#{attr}] != value
 
-            self.#{property} ||= {}
             #{property}[:#{attr}] = value
           end
         RUBY

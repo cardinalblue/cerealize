@@ -64,4 +64,5 @@ end
 
 ActiveRecord::Base.connection.create_table :apples, :force => true do |t|
   t.text :data
+  t.timestamps :updated_at
 end
