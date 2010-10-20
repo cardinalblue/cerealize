@@ -10,8 +10,9 @@ module Cerealize
   InternalName = 'CerealizeMethods'
 
   module Codec
-    autoload 'Yaml',    'cerealize/codec/yaml'
+    autoload 'Yaml'   , 'cerealize/codec/yaml'
     autoload 'Marshal', 'cerealize/codec/marshal'
+    autoload 'Text'   , 'cerealize/codec/text'
   end
   class NoSuchCodec     < ArgumentError; end
   class NoSuitableCodec < RuntimeError ; end
@@ -36,7 +37,7 @@ module Cerealize
   end
 
   def codec_names
-    @codec_names ||= [:yaml, :marshal]
+    @codec_names ||= [:yaml, :marshal, :text]
   end
 
   def codec_detect(str)
