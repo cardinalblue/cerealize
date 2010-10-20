@@ -1,5 +1,23 @@
 = cerealize changes history
 
+== cerealize 0.8.7 -- 2010-10-20
+
+* Added a special encoding: "text". The purpose of this encoding is to
+  let you migrate from a plain/text database column into an encoded one.
+  Since Ruby 1.8's YAML engine, Sych, has some problems dumping some kinds
+  of data, producing improperly formatted YAML. This causes an issue in
+  delayed_job, which uses YAML to serialize ActiveRecord object, and cannot
+  properly restore that object due to the bad YAML format.
+
+  So we need to encode the column, preventing from Sych dumping bad YAML.
+  This special text encoding is only used for decoding, not encoding.
+  (Thus don't use it for encoding! It actually uses YAML to encode.)
+  Since cerealize has the ability to detect the encoding, it will fall back
+  to text encoding if it's not any of the supported encoding. Thus reading
+  text from the column, then storing back to Marshal or YAML. In this case,
+  we need Marshal because all the problem comes from YAML, which delayed_job
+  uses anyway.
+
 == cerealize 0.8.6 -- 2010-09-29
 
 * Make sure attr_hash didn't get saved setting the same value.
