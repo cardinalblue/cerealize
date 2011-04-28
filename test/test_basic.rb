@@ -91,7 +91,7 @@ class BasicTest < Test::Unit::TestCase
     hook = {:hook => {:class    => Integer,
                       :encoding => :marshal,
                       :codec    => Cerealize::Codec::Marshal}}
-    assert_equal(mood            ,    Dog.cerealize_option)
+    assert_equal(mood.merge(hook),    Dog.cerealize_option)
     assert_equal(mood.merge(hook), BigDog.cerealize_option)
   end
 

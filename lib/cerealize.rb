@@ -25,7 +25,7 @@ module Cerealize
   def self.included(base)
     base.send( :extend,    ClassMethods)
     base.send(:include, InstanceMethods)
-    base.class_inheritable_accessor :cerealize_option
+    base.superclass_delegating_accessor :cerealize_option
     base.cerealize_option = {}
   end
 
