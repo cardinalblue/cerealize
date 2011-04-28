@@ -1,7 +1,5 @@
 # encoding: utf-8
 
-# encoding: utf-8
-
 require "#{dir = File.dirname(__FILE__)}/task/gemgem"
 Gemgem.dir = dir
 
@@ -20,6 +18,8 @@ task 'gem:spec' do
 
     s.authors     = ['Cardinal Blue', 'Lin Jen-Shin (godfat)', 'Jaime Cham']
     s.email       = ['dev (XD) cardinalblue.com']
+
+    s.files.reject!{ |p| p.start_with?('slide/') }
   end
 
   Gemgem.write
