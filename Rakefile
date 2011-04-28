@@ -1,39 +1,26 @@
 # encoding: utf-8
 
-begin
-  require 'bones'
-rescue LoadError
-  abort '### Please install the "bones" gem ###'
-end
+# encoding: utf-8
 
-ensure_in_path 'lib'
-proj = 'cerealize'
-require "#{proj}/version"
+require "#{dir = File.dirname(__FILE__)}/task/gemgem"
+Gemgem.dir = dir
 
-Bones{
-  ruby_opts [''] # silence warning for now
+($LOAD_PATH << File.expand_path("#{Gemgem.dir}/lib" )).uniq!
 
-  version Cerealize::VERSION
+desc 'Generate gemspec'
+task 'gem:spec' do
+  Gemgem.spec = Gemgem.create do |s|
+    require 'cerealize/version'
+    s.name        = 'cerealize'
+    s.version     = Cerealize::VERSION
+    # s.executables = [s.name]
 
-  depend_on 'activerecord',                       :version => '<3'
-  # depend_on 'activerecord', :development => true, :version => '>=2.3.5'
-  depend_on 'sqlite3-ruby', :development => true
+    %w[activerecord].each{ |g| s.add_runtime_dependency(g, '<3') }
+    %w[sqlite3-ruby].each{ |g| s.add_development_dependency(g) }
 
-  name    proj
-  url     "http://github.com/cardinalblue/#{proj}"
-  authors ['Cardinal Blue', 'Lin Jen-Shin (aka godfat 真常)', 'Jaime Cham']
-  email   'dev (XD) cardinalblue.com'
+    s.authors     = ['Cardinal Blue', 'Lin Jen-Shin (godfat)', 'Jaime Cham']
+    s.email       = ['dev (XD) cardinalblue.com']
+  end
 
-  history_file   'CHANGES'
-   readme_file   'README'
-   ignore_file   '.gitignore'
-  rdoc.include   ['\w+']
-  rdoc.exclude   ['test', 'doc', 'Rakefile', 'slide']
-}
-
-CLEAN.include Dir['**/*.rbc']
-
-task :default do
-  Rake.application.options.show_task_pattern = /./
-  Rake.application.display_tasks_and_comments
+  Gemgem.write
 end
