@@ -9,8 +9,8 @@ Gem::Specification.new do |s|
   s.date = %q{2011-04-28}
   s.description = %q{Serialize out of the Cerealize Box - a drop-in replacement for ActiveRecord's serialize}
   s.email = ["dev (XD) cardinalblue.com"]
-  s.extra_rdoc_files = ["CHANGES", "CONTRIBUTORS", "LICENSE", "TODO"]
-  s.files = [".gitignore", "CHANGES", "LICENSE", "README", "README.rdoc", "Rakefile", "TODO", "bench/simple.png", "bench/simple.rb", "cerealize.gemspec", "init.rb", "lib/cerealize.rb", "lib/cerealize/attr_hash.rb", "lib/cerealize/codec/marshal.rb", "lib/cerealize/codec/text.rb", "lib/cerealize/codec/yaml.rb", "lib/cerealize/version.rb", "task/gemgem.rb", "test/common.rb", "test/real.rb", "test/stub.rb", "test/test_all_codec.rb", "test/test_attr_hash.rb", "test/test_basic.rb", "test/test_transcode.rb", "CONTRIBUTORS"]
+  s.extra_rdoc_files = ["CHANGES", "LICENSE", "TODO"]
+  s.files = [".gitignore", "CHANGES", "LICENSE", "README", "README.rdoc", "Rakefile", "TODO", "bench/simple.png", "bench/simple.rb", "cerealize.gemspec", "init.rb", "lib/cerealize.rb", "lib/cerealize/attr_hash.rb", "lib/cerealize/codec/marshal.rb", "lib/cerealize/codec/text.rb", "lib/cerealize/codec/yaml.rb", "lib/cerealize/version.rb", "task/gemgem.rb", "test/common.rb", "test/real.rb", "test/stub.rb", "test/test_all_codec.rb", "test/test_attr_hash.rb", "test/test_basic.rb", "test/test_transcode.rb"]
   s.homepage = %q{http://github.com/godfat/}
   s.rdoc_options = ["--main", "README"]
   s.require_paths = ["lib"]
