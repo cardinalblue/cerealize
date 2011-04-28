@@ -1,5 +1,13 @@
 = cerealize changes history
 
+== cerealize 0.9.0 -- 2011-04-28
+
+* changed class_inheritable_accessor to superclass_delegating_accessor.
+  Because the behaviour of superclass_delegating_accessor is more
+  predictable, it won't be suffering from class load order issue as
+  superclass_delegating_accessor would be. This might fix some weird
+  missing cerealize option problem.
+
 == cerealize 0.8.7 -- 2010-10-20
 
 * Added a special encoding: "text". The purpose of this encoding is to

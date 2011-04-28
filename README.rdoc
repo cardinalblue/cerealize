@@ -1,4 +1,4 @@
-= cerealize 0.8.7
+= cerealize
 by Cardinal Blue ( http://cardinalblue.com )
 
 == LINKS:
@@ -21,7 +21,7 @@ by Cardinal Blue ( http://cardinalblue.com )
  3. JSON (planned)
 
  Current supported ORM:
- 1. ActiveRecord (tested with 2.3.10)
+ 1. ActiveRecord (tested with 2.3.11)
  2. DataMapper (planned)
 
 == SYNOPSIS:
