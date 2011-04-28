@@ -17,7 +17,7 @@ module Gemgem
                       match(/DESCRIPTION:\n\n(.+?)\n\n/m)[1]
       s.description = s.summary
 
-      s.extra_rdoc_files = %w[CHANGES CONTRIBUTORS LICENSE TODO]
+      s.extra_rdoc_files = %w[CHANGES LICENSE TODO]
       s.rdoc_options     = %w[--main README]
       s.rubygems_version = Gem::VERSION
       s.date             = Time.now.strftime('%Y-%m-%d')
