@@ -11,6 +11,7 @@ task 'gem:spec' do
     require 'cerealize/version'
     s.name        = 'cerealize'
     s.version     = Cerealize::VERSION
+    s.homepage    = 'https://github.com/cardinalblue/cerealize'
     # s.executables = [s.name]
 
     %w[activerecord].each{ |g| s.add_runtime_dependency(g, '<3') }
@@ -18,9 +19,9 @@ task 'gem:spec' do
 
     s.authors     = ['Cardinal Blue', 'Lin Jen-Shin (godfat)', 'Jaime Cham']
     s.email       = ['dev (XD) cardinalblue.com']
-
-    s.files.reject!{ |p| p.start_with?('slide/') }
   end
+
+  Gemgem.spec.files.reject!{ |p| p.start_with?('slide/') }
 
   Gemgem.write
 end

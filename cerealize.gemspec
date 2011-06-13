@@ -5,21 +5,60 @@ Gem::Specification.new do |s|
   s.version = "0.9.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Cardinal Blue", "Lin Jen-Shin (godfat)", "Jaime Cham"]
-  s.date = %q{2011-04-28}
+  s.authors = [
+  %q{Cardinal Blue},
+  %q{Lin Jen-Shin (godfat)},
+  %q{Jaime Cham}]
+  s.date = %q{2011-06-13}
   s.description = %q{Serialize out of the Cerealize Box - a drop-in replacement for ActiveRecord's serialize}
-  s.email = ["dev (XD) cardinalblue.com"]
-  s.extra_rdoc_files = ["CHANGES", "LICENSE", "TODO"]
-  s.files = [".gitignore", "CHANGES", "LICENSE", "README", "README.rdoc", "Rakefile", "TODO", "bench/simple.png", "bench/simple.rb", "cerealize.gemspec", "init.rb", "lib/cerealize.rb", "lib/cerealize/attr_hash.rb", "lib/cerealize/codec/marshal.rb", "lib/cerealize/codec/text.rb", "lib/cerealize/codec/yaml.rb", "lib/cerealize/version.rb", "task/gemgem.rb", "test/common.rb", "test/real.rb", "test/stub.rb", "test/test_all_codec.rb", "test/test_attr_hash.rb", "test/test_basic.rb", "test/test_transcode.rb"]
-  s.homepage = %q{http://github.com/godfat/}
-  s.rdoc_options = ["--main", "README"]
-  s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.7}
+  s.email = [%q{dev (XD) cardinalblue.com}]
+  s.extra_rdoc_files = [
+  %q{CHANGES},
+  %q{CONTRIBUTORS},
+  %q{LICENSE},
+  %q{TODO}]
+  s.files = [
+  %q{.gitignore},
+  %q{.gitmodules},
+  %q{CHANGES},
+  %q{LICENSE},
+  %q{README},
+  %q{README.rdoc},
+  %q{Rakefile},
+  %q{TODO},
+  %q{bench/simple.png},
+  %q{bench/simple.rb},
+  %q{cerealize.gemspec},
+  %q{init.rb},
+  %q{lib/cerealize.rb},
+  %q{lib/cerealize/attr_hash.rb},
+  %q{lib/cerealize/codec/marshal.rb},
+  %q{lib/cerealize/codec/text.rb},
+  %q{lib/cerealize/codec/yaml.rb},
+  %q{lib/cerealize/version.rb},
+  %q{task/gemgem.rb},
+  %q{test/common.rb},
+  %q{test/real.rb},
+  %q{test/stub.rb},
+  %q{test/test_all_codec.rb},
+  %q{test/test_attr_hash.rb},
+  %q{test/test_basic.rb},
+  %q{test/test_transcode.rb},
+  %q{CONTRIBUTORS}]
+  s.homepage = %q{https://github.com/cardinalblue/cerealize}
+  s.rdoc_options = [
+  %q{--main},
+  %q{README}]
+  s.require_paths = [%q{lib}]
+  s.rubygems_version = %q{1.8.5}
   s.summary = %q{Serialize out of the Cerealize Box - a drop-in replacement for ActiveRecord's serialize}
-  s.test_files = ["test/test_all_codec.rb", "test/test_attr_hash.rb", "test/test_basic.rb", "test/test_transcode.rb"]
+  s.test_files = [
+  %q{test/test_all_codec.rb},
+  %q{test/test_attr_hash.rb},
+  %q{test/test_basic.rb},
+  %q{test/test_transcode.rb}]
 
   if s.respond_to? :specification_version then
-    current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
