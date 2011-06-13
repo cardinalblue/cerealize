@@ -19,9 +19,9 @@ task 'gem:spec' do
 
     s.authors     = ['Cardinal Blue', 'Lin Jen-Shin (godfat)', 'Jaime Cham']
     s.email       = ['dev (XD) cardinalblue.com']
-  end
 
-  Gemgem.spec.files.reject!{ |p| p.start_with?('slide/') }
+    s.files.reject!{ |p| p.start_with?('slide/') }
+  end
 
   Gemgem.write
 end
