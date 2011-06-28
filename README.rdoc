@@ -9,8 +9,7 @@ by Cardinal Blue ( http://cardinalblue.com )
 
 == DESCRIPTION:
 
- Serialize out of the Cerealize Box
- - a drop-in replacement for ActiveRecord's serialize
+ Serialize out of the Cerealize Box - a drop-in replacement for ActiveRecord's serialize
 
  It can auto transcode old encoding (yaml if you're using AR's serialize),
  to new encoding (marshal, json, you name it) without any migration.

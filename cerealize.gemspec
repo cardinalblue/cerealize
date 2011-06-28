@@ -9,8 +9,11 @@ Gem::Specification.new do |s|
   %q{Cardinal Blue},
   %q{Lin Jen-Shin (godfat)},
   %q{Jaime Cham}]
-  s.date = %q{2011-06-13}
-  s.description = %q{Serialize out of the Cerealize Box - a drop-in replacement for ActiveRecord's serialize}
+  s.date = %q{2011-06-28}
+  s.description = %q{ Serialize out of the Cerealize Box - a drop-in replacement for ActiveRecord's serialize
+
+ It can auto transcode old encoding (yaml if you're using AR's serialize),
+ to new encoding (marshal, json, you name it) without any migration.}
   s.email = [%q{dev (XD) cardinalblue.com}]
   s.extra_rdoc_files = [
   %q{CHANGES},
@@ -21,6 +24,7 @@ Gem::Specification.new do |s|
   %q{.gitignore},
   %q{.gitmodules},
   %q{CHANGES},
+  %q{CONTRIBUTORS},
   %q{LICENSE},
   %q{README},
   %q{README.rdoc},
@@ -36,6 +40,7 @@ Gem::Specification.new do |s|
   %q{lib/cerealize/codec/text.rb},
   %q{lib/cerealize/codec/yaml.rb},
   %q{lib/cerealize/version.rb},
+  %q{task/.gitignore},
   %q{task/gemgem.rb},
   %q{test/common.rb},
   %q{test/real.rb},
@@ -43,8 +48,7 @@ Gem::Specification.new do |s|
   %q{test/test_all_codec.rb},
   %q{test/test_attr_hash.rb},
   %q{test/test_basic.rb},
-  %q{test/test_transcode.rb},
-  %q{CONTRIBUTORS}]
+  %q{test/test_transcode.rb}]
   s.homepage = %q{https://github.com/cardinalblue/cerealize}
   s.rdoc_options = [
   %q{--main},
@@ -62,14 +66,17 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<activerecord>, ["< 3"])
+      s.add_runtime_dependency(%q<activerecord>, [">= 0"])
       s.add_development_dependency(%q<sqlite3>, [">= 0"])
+      s.add_development_dependency(%q<bacon>, [">= 0"])
     else
-      s.add_dependency(%q<activerecord>, ["< 3"])
+      s.add_dependency(%q<activerecord>, [">= 0"])
       s.add_dependency(%q<sqlite3>, [">= 0"])
+      s.add_dependency(%q<bacon>, [">= 0"])
     end
   else
-    s.add_dependency(%q<activerecord>, ["< 3"])
+    s.add_dependency(%q<activerecord>, [">= 0"])
     s.add_dependency(%q<sqlite3>, [">= 0"])
+    s.add_dependency(%q<bacon>, [">= 0"])
   end
 end

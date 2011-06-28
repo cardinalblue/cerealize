@@ -1,12 +1,13 @@
 # encoding: utf-8
 
-require 'rubygems' if RUBY_VERSION < '1.9.1'
 require 'cerealize'
+
+require 'bacon'
 
 require_relative 'stub'
 require_relative 'real'
 
-require 'test/unit'
+Bacon.summary_on_exit
 
 def set_encoding(encoding)
   Boat.cerealize_option[:captain] = {:class    => nil,

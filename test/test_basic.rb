@@ -8,91 +8,90 @@ end
 
 require_relative 'common'
 
-class BasicTest < Test::Unit::TestCase
-  def setup
+describe Cerealize do
+  before do
     Boat.delete_all
   end
 
-  def teardown
+  should 'no conflict' do
+     Cat.respond_to?(:captain).should.equal false
+    Boat.respond_to?(:food)   .should.equal false
   end
 
-  def test_no_conflict
-    assert ! Cat.respond_to?(:captain)
-    assert !Boat.respond_to?(:food)
+  should 'cerealize module' do
+    ( Cat <  Cat::CerealizeMethods).should.equal true
+    (Boat < Boat::CerealizeMethods).should.equal true
+
+    ( Cat < Boat::CerealizeMethods).should.equal nil
+    (Boat <  Cat::CerealizeMethods).should.equal nil
   end
 
-  def test_cerealize_module
-    assert    Cat <  Cat::CerealizeMethods
-    assert   Boat < Boat::CerealizeMethods
 
-    assert !( Cat < Boat::CerealizeMethods)
-    assert !(Boat <  Cat::CerealizeMethods)
+  should 'super calling' do
+    Dog.new.mood                     .should.equal 'mood: '
+    Dog.new(:mood => 'cheerful').mood.should.equal 'mood: cheerful'
   end
 
-  def test_super_calling
-    assert_equal 'mood: ',         Dog.new.mood
-    assert_equal 'mood: cheerful', Dog.new(:mood => 'cheerful').mood
-  end
-
-  def test_setting_nil_in_hash
+  should 'setting nil in hash' do
     apple = Apple.create(:data => {:name => 'pine'})
-    assert_equal({:name => 'pine'}, apple.data)
-    assert_equal 'pine', apple.name
+    apple.data.should.equal({:name => 'pine'})
+    apple.name.should.equal 'pine'
     apple.data[:name] = nil
-    assert_equal nil, apple.name
+    apple.name.should.equal nil
     apple.save; apple.reload
-    assert_equal nil, apple.name
-    assert_equal({:name => nil}, apple.data)
+    apple.name.should.equal nil
+    apple.data.should.equal({:name => nil})
   end
 
-  def test_save_nil
+  should 'save nil' do
     apple = Apple.find(Apple.create(:data => [5]).id)
-    assert_equal [5], apple.data
+    apple.data.should.equal [5]
     apple.update_attributes(:data => nil)
-    assert_equal nil, apple.data
-    assert_equal nil, Apple.find(apple.id).data
+    apple.data.should.equal nil
+    Apple.find(apple.id).data.should.equal nil
   end
 
-  def test_encoding_yaml
+  should 'encoding yaml' do
     set_encoding(:yaml)
     Boat.create :name => 'yamato', :captain => Person.new('kosaku')
     s = Boat.connection.select_value("SELECT captain FROM boats WHERE name='yamato';")
-    assert s[0..2] = '---'
+    s[0..2].should.equal '---'
   end
 
-  def test_encoding_marshal
+  should 'encoding marshal' do
     set_encoding(:marshal)
     Boat.create :name => 'santa maria', :captain => Person.new('columbus')
     s = Boat.connection.select_value("SELECT captain FROM boats WHERE name='santa maria';")
-    assert s[0..1] = 'BA'
+    s[0..1].should.equal 'BA'
   end
 
-  def test_cerealize_option
-    assert_equal({:name => {:class    => String,
-                            :encoding => :yaml,
-                            :codec    => Cerealize::Codec::Yaml},
+  should 'cerealize option' do
+    Cat.cerealize_option.should.equal(
+      {:name => {:class    => String,
+                 :encoding => :yaml,
+                 :codec    => Cerealize::Codec::Yaml},
 
-                  :tail => {:class    => Array,
-                            :encoding => :marshal,
-                            :codec    => Cerealize::Codec::Marshal,
-                            :force_encoding => true},
+       :tail => {:class    => Array,
+                 :encoding => :marshal,
+                 :codec    => Cerealize::Codec::Marshal,
+                 :force_encoding => true},
 
-                  :food => {:class    => Hash,
-                            :encoding => :marshal,
-                            :codec    => Cerealize::Codec::Marshal,
-                            :force_encoding => false}},
-                 Cat.cerealize_option)
+       :food => {:class    => Hash,
+                 :encoding => :marshal,
+                 :codec    => Cerealize::Codec::Marshal,
+                 :force_encoding => false}})
   end
 
-  def test_inheritance
+  should 'inheritance' do
     mood = {:mood => {:class    => String,
                       :encoding => :marshal,
                       :codec    => Cerealize::Codec::Marshal}}
     hook = {:hook => {:class    => Integer,
                       :encoding => :marshal,
                       :codec    => Cerealize::Codec::Marshal}}
-    assert_equal(mood.merge(hook),    Dog.cerealize_option)
-    assert_equal(mood.merge(hook), BigDog.cerealize_option)
+       Dog.cerealize_option.should.equal mood.merge(hook)
+    BigDog.cerealize_option.should.equal mood.merge(hook)
   end
+
 
 end
