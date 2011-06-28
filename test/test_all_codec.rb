@@ -160,9 +160,8 @@ describe Cerealize do
       Boat.create :name => 'lollypop', :cargo => Blob.new
       Boat.find_by_name 'lollypop'
 
-      Boat.create :name => 'minerva', :cargo => "WRONG KIND"
       lambda{
-        Boat.find_by_name('minerva').cargo
+        Boat.create :name => 'minerva', :cargo => "WRONG KIND"
       }.should.raise ActiveRecord::SerializationTypeMismatch
     end
 
