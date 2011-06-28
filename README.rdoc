@@ -19,10 +19,6 @@ by Cardinal Blue ( http://cardinalblue.com )
  2. Marshal
  3. JSON (planned)
 
- Current supported ORM:
- 1. ActiveRecord (tested with 2.3.11)
- 2. DataMapper (planned)
-
 == SYNOPSIS:
 
  require 'cerealize'
@@ -49,7 +45,7 @@ by Cardinal Blue ( http://cardinalblue.com )
 == REQUIREMENTS:
 
 * tested with MRI 1.8.7 and 1.9.1
-* one of your desired ORM
+* ActiveRecord 2 or 3
 
 == INSTALL:
 
@@ -61,7 +57,7 @@ by Cardinal Blue ( http://cardinalblue.com )
 
   Apache License 2.0
 
-  Copyright (c) 2010, Cardinal Blue
+  Copyright (c) 2010-2011, Cardinal Blue
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
