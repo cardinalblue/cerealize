@@ -7,8 +7,14 @@ end
 
 require_relative 'common'
 
-class AttrHashTest < Test::Unit::TestCase
-  def test_simple
+describe 'attr_hash' do
+  def simple_case hh, ah
+    ah.name.should.equal hh[:name]
+    ah.size.should.equal hh[:size]
+    ah.data.should.equal hh
+  end
+
+  should 'simple' do
     hh = {:name => 'wane', :size => 123456}
     ah = Apple.new(hh)
 
@@ -20,29 +26,23 @@ class AttrHashTest < Test::Unit::TestCase
     simple_case(hh, ah)
   end
 
-  def test_nil
-    assert_nil Apple.new.name
-    assert_nil Apple.new.data
+  should 'nil' do
+    Apple.new.name.should.equal nil
+    Apple.new.data.should.equal nil
   end
 
-  def test_dont_save_twice
+  should 'dont save twice' do
     apple = Apple.create(:name => 'banana')
-    assert apple.updated_at
+    apple.updated_at.should.not.equal nil
 
     Apple.record_timestamps = false
     apple.update_attributes(:updated_at => nil)
     Apple.record_timestamps = true
     apple2 = Apple.find(apple.id)
-    assert_equal nil, apple2.updated_at
+    apple2.updated_at.should.equal nil
     apple2.update_attributes :name => 'banana'
-    assert_equal nil, apple2.updated_at
+    apple2.updated_at.should.equal nil
     apple2.update_attributes :name => 'pineapple'
-    assert apple2.updated_at
-  end
-
-  def simple_case hh, ah
-    assert_equal hh[:name], ah.name
-    assert_equal hh[:size], ah.size
-    assert_equal hh       , ah.data
+    apple2.updated_at.should.not.equal nil
   end
 end
