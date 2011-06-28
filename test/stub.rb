@@ -10,9 +10,11 @@ class Person
   attr_accessor(*ATTR)
 
   def ==(other)
+    return false if other.class != self.class
     ATTR.all?{|m| send(m) == other.send(m) }
   end
   def eql?(other)
+    return false if other.class != self.class
     ATTR.all?{|m| send(m).eql? other.send(m) }
   end
 end
