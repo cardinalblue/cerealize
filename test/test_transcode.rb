@@ -8,31 +8,26 @@ end
 
 require_relative 'common'
 
-class TranscodeTest < Test::Unit::TestCase
-  def setup
+describe Cerealize do
+  before do
     Cat.delete_all
   end
 
-  def teardown
-  end
-
-  def test_no_such_codec
-    assert_raise Cerealize::NoSuchCodec do
+  should 'no such codec' do
+    lambda{
       Cat.dup.send(:cerealize, :bad, Hash, :encoding => :blah)
-    end
+    }.should.raise(Cerealize::NoSuchCodec)
   end
 
-  def test_no_suitable_codec_if_force_encoding
+  should 'no suitable codec if force encoding' do
     cat = Cat.new
     cat[:tail] = '---'
-    cat.save
-    id = cat.id
-    assert_raise Cerealize::NoSuitableCodec do
-      Cat.find(id).tail
-    end
+    lambda{
+      cat.tail
+    }.should.raise(Cerealize::NoSuitableCodec)
   end
 
-  def test_auto_transcode_yaml
+  should 'auto transcode yaml' do
     name = 'Nine Tails'
     marshaled_name = Cerealize::Codec::Marshal.encode(name)
     cat = Cat.new
@@ -41,20 +36,20 @@ class TranscodeTest < Test::Unit::TestCase
     id = cat.id
 
     new_cat = Cat.find(id)
-    assert_equal name, new_cat.name
+    new_cat.name.should.equal name
     new_cat.name.reverse!
 
     # no change if not saved yet
-    assert_equal marshaled_name, new_cat[:name]
+    new_cat[:name].should.equal marshaled_name
     new_cat.save
 
     # should be transcode into YAML
-    assert Cerealize::Codec::Yaml.yours?(new_cat[:name])
+    Cerealize::Codec::Yaml.yours?(new_cat[:name]).should.equal true
     new_cat.reload
-    assert Cerealize::Codec::Yaml.yours?(new_cat[:name])
+    Cerealize::Codec::Yaml.yours?(new_cat[:name]).should.equal true
   end
 
-  def test_auto_transcode_marshal
+  should 'auto transcode marshal' do
     food = {:a => :b}
     yamled_food = Cerealize::Codec::Yaml.encode(food)
     cat = Cat.new
@@ -62,13 +57,13 @@ class TranscodeTest < Test::Unit::TestCase
     cat.save
     cat.reload
 
-    assert_equal food, cat.food
-    assert_equal yamled_food, cat[:food]
+    cat .food .should.equal food
+    cat[:food].should.equal yamled_food
     cat.food.merge!(:c => :d)
     cat.save
     cat.reload
 
-    assert Cerealize::Codec::Marshal.yours?(cat[:food])
-    assert_equal food.merge(:c => :d), cat.food
+    Cerealize::Codec::Marshal.yours?(cat[:food]).should.equal true
+    cat.food.should.equal food.merge(:c => :d)
   end
 end
