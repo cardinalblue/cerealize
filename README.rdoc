@@ -44,8 +44,10 @@ by Cardinal Blue ( http://cardinalblue.com )
 
 == REQUIREMENTS:
 
-* tested with MRI 1.8.7 and 1.9.1
 * ActiveRecord 2 or 3
+* Tested with MRI (official ruby) 1.9.2, 1.8.7, and trunk
+* Tested with Rubinius (rbx) 1.2.3
+* Tested with JRuby 1.6.2
 
 == INSTALL:
 
