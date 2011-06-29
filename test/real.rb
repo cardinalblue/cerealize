@@ -1,7 +1,13 @@
 # encoding: utf-8
 
+adapter = if defined?(RUBY_ENGINE) && RUBY_ENGINE == 'jruby'
+            'jdbcsqlite3'
+          else
+            'sqlite3'
+          end
+
 ActiveRecord::Base.establish_connection(
-  :adapter  => 'sqlite3',
+  :adapter  => adapter,
   :database => ':memory:'
 )
 

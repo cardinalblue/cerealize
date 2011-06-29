@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   %q{Cardinal Blue},
   %q{Lin Jen-Shin (godfat)},
   %q{Jaime Cham}]
-  s.date = %q{2011-06-28}
+  s.date = %q{2011-06-29}
   s.description = %q{ Serialize out of the Cerealize Box - a drop-in replacement for ActiveRecord's serialize
 
  It can auto transcode old encoding (yaml if you're using AR's serialize),
@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
   %q{.gitmodules},
   %q{CHANGES},
   %q{CONTRIBUTORS},
+  %q{Gemfile},
   %q{LICENSE},
   %q{README},
   %q{README.rdoc},
@@ -67,16 +68,16 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<activerecord>, [">= 0"])
-      s.add_development_dependency(%q<sqlite3>, [">= 0"])
       s.add_development_dependency(%q<bacon>, [">= 0"])
+      s.add_development_dependency(%q<sqlite3>, [">= 0"])
     else
       s.add_dependency(%q<activerecord>, [">= 0"])
-      s.add_dependency(%q<sqlite3>, [">= 0"])
       s.add_dependency(%q<bacon>, [">= 0"])
+      s.add_dependency(%q<sqlite3>, [">= 0"])
     end
   else
     s.add_dependency(%q<activerecord>, [">= 0"])
-    s.add_dependency(%q<sqlite3>, [">= 0"])
     s.add_dependency(%q<bacon>, [">= 0"])
+    s.add_dependency(%q<sqlite3>, [">= 0"])
   end
 end
