@@ -15,7 +15,7 @@ task 'gem:spec' do
     # s.executables = [s.name]
 
     %w[activerecord].each{ |g| s.add_runtime_dependency(g)     }
-    %w[bacon]       .each{ |g| s.add_development_dependency(g) }
+    %w[rake bacon]  .each{ |g| s.add_development_dependency(g) }
     if defined?(RUBY_ENGINE) && RUBY_ENGINE == 'jruby'
       s.add_development_dependency('activerecord-jdbcsqlite3-adapter')
     else
