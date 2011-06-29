@@ -105,7 +105,7 @@ module Cerealize
 
       mod.module_eval <<-RUBY, __FILE__, __LINE__ + 1
         def #{field_cache}
-          @#{property}
+          @#{property} ||= nil
         end
 
         def #{field_cache}=(new_value)
