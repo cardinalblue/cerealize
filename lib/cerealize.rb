@@ -2,6 +2,7 @@
 
 require 'cerealize/attr_hash'
 
+gem 'activerecord'
 require 'active_record'
 autoload :YAML, 'yaml'
 
