@@ -161,7 +161,7 @@ describe Cerealize do
       Boat.find_by_name 'lollypop'
 
       lambda{
-        Boat.create :name => 'minerva', :cargo => "WRONG KIND"
+        Boat.create(:name => 'minerva', :cargo => "WRONG KIND").cargo
       }.should.raise ActiveRecord::SerializationTypeMismatch
     end
 
