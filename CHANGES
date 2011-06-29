@@ -1,5 +1,10 @@
 = cerealize changes history
 
+== cerealize 1.0.0 -- 2011-06-29
+
+* Nothing really changed, but officially support ActiveRecord 2 and 3 now.
+* Added JRuby and Rubinius support.
+
 == cerealize 0.9.0 -- 2011-04-28
 
 * changed class_inheritable_accessor to superclass_delegating_accessor.
