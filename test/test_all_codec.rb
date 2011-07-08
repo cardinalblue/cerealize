@@ -51,6 +51,10 @@ describe Cerealize do
                       when Hash;   captain.merge(:key2 => [1,2])
                     end
         b.changed?.should.equal true
+
+        bb = Boat.find(b.id)
+        bb.captain = captain
+        bb.changed?.should.equal false
       end
     end
 

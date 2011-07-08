@@ -105,7 +105,13 @@ module Cerealize
 
       mod.module_eval <<-RUBY, __FILE__, __LINE__ + 1
         def #{field_cache}
-          @#{property} ||= nil
+          if defined?(@#{property})
+            @#{property}
+          else
+            # define @#{property} to avoid mutual recursion
+            @#{property} = nil
+            @#{property} = #{property}
+          end
         end
 
         def #{field_cache}=(new_value)
@@ -123,7 +129,7 @@ module Cerealize
       mod.module_eval <<-RUBY, __FILE__, __LINE__ + 1
         def #{property}
           # Return cached
-          return #{field_cache} if #{field_cache}
+          return #{field_cache} if defined?(@#{property}) && #{field_cache}
 
           # No assignment yet, save property if not already saved
           self.#{field_orig}= self[:#{property}] if !#{field_orig}
