@@ -2,14 +2,14 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cerealize}
-  s.version = "1.0.0"
+  s.version = "1.0.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [
   %q{Cardinal Blue},
   %q{Lin Jen-Shin (godfat)},
   %q{Jaime Cham}]
-  s.date = %q{2011-06-29}
+  s.date = %q{2011-07-08}
   s.description = %q{ Serialize out of the Cerealize Box - a drop-in replacement for ActiveRecord's serialize
 
  It can auto transcode old encoding (yaml if you're using AR's serialize),

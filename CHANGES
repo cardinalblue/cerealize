@@ -1,5 +1,10 @@
 = cerealize changes history
 
+== cerealize 1.0.1 -- 2011-07-08
+
+* Fixed a bug that even setting identical value to the newly found record,
+  the record would be marked as changed.
+
 == cerealize 1.0.0 -- 2011-06-29
 
 * Nothing really changed, but officially support ActiveRecord 2 and 3 now.
