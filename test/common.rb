@@ -1,5 +1,7 @@
 # encoding: utf-8
 
+require 'bundler/setup'
+
 require 'cerealize'
 
 require 'bacon'
