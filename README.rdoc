@@ -3,7 +3,7 @@ by Cardinal Blue ( http://cardinalblue.com )
 
 == LINKS:
 
-* {github}[http://github.com/cardinalblue/cerealize]
+* {github}[https://github.com/cardinalblue/cerealize]
 * {rubygems}[http://rubygems.org/gems/cerealize]
 * {rdoc}[http://rdoc.info/projects/cardinalblue/cerealize]
 
