@@ -34,7 +34,7 @@ module Cerealize
               const_set(Cerealize::InternalName, Module.new)
             end
 
-      mod.module_eval ruby
+      mod.module_eval(ruby, __FILE__, __LINE__)
       include mod unless self < mod
     end
   end
