@@ -68,6 +68,14 @@ class Apple < ActiveRecord::Base
   attr_hash :data, [:name, :size]
 end
 
+class Pineapple < Apple
+  before_save :enlarge
+  def enlarge
+    self.size *= 2
+    # data_update_if_dirty
+  end
+end
+
 ActiveRecord::Base.connection.create_table :apples, :force => true do |t|
   t.text :data
   t.timestamps :updated_at
