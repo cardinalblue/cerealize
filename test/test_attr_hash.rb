@@ -36,13 +36,13 @@ describe 'attr_hash' do
     apple.updated_at.should.not.equal nil
 
     Apple.record_timestamps = false
-    apple.update_attributes(:updated_at => nil)
+    apple.update_attributes(:updated_at => 0)
     Apple.record_timestamps = true
     apple2 = Apple.find(apple.id)
-    apple2.updated_at.should.equal nil
+    apple2.updated_at.should.equal 0
     apple2.update_attributes :name => 'banana'
-    apple2.updated_at.should.equal nil
+    apple2.updated_at.should.equal 0
     apple2.update_attributes :name => 'pineapple'
-    apple2.updated_at.should.not.equal nil
+    apple2.updated_at.should.not.equal 0
   end
 end
