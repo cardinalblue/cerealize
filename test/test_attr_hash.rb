@@ -45,4 +45,9 @@ describe 'attr_hash' do
     apple2.update_attributes :name => 'pineapple'
     apple2.updated_at.should.not.equal 0
   end
+
+  should 'before save' do
+    p = Pineapple.create(:size => 5)
+    Pineapple.find(p.id).size.should.equal 10
+  end
 end

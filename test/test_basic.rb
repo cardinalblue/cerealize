@@ -92,9 +92,4 @@ describe Cerealize do
        Dog.cerealize_option.should.equal mood.merge(hook)
     BigDog.cerealize_option.should.equal mood.merge(hook)
   end
-
-  should 'before save' do
-    p = Pineapple.create(:size => 5)
-    Pineapple.find(p.id).size.should.equal 10
-  end
 end
